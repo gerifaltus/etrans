@@ -1,0 +1,82 @@
+- CITAS
+    - GENERAR CITA
+        - Pantalla 1
+            _ Campos
+                - # Pedido
+                - # Factura
+                - Referencia
+
+                - # Cajas
+                - # Pallets
+                - Modalidad Entrega (combo)
+                - Tipo Transporte (combo)
+
+                - Comentarios
+
+
+        - Pantalla 2
+            - Campos
+                - Calendario
+                - Horario
+        - Pantalla 3
+            - Información
+                - Campos de pantalla 1 + calendario
+                - No. de cita
+                - Clave de confirmación
+
+    -COMPORTAMIENTO:
+        OK - Selector de archivos dinámico, indicar factura y pedido (dinamico)
+        * - Indicar pallets separados, cajas, 
+    
+    - REASIGNAR CITA
+        - 3 Pasos
+            - Mismos pasos que en generar citas
+OK            - Pantalla 1: Agregar cuadro de texto: No. de Cita y Clave de confirmación
+                - Llenar los campos de acuerdo a la informacion encontrada con el
+                  no. de cita y clave de confirmación.
+            - Pantalla 2: Indicar la fecha y hora seleccionada en la fecha actual
+            - Pantalla 3: Resumen nuevo con No. de cita nueva + clave de confirmacion.
+        - REQUERIMIENTO: buscar en la reasignacion de cita si la nueva cita tiene el mismo pedido
+             para penalizar y avisar que es el mismo
+            - cancelacion por cliente por 48 hrs de anticipacion
+            - Indicar con el username quien reasigno, cita en base al cliente o portoprint,para reportear las reasignaciones
+            - Resignado por indicar el username
+            - Indicar en el resumen el numero de cita anterior y el numero de cita nuevo
+            - Indicar el resumen de documentos cargados
+
+    - ITINERARIO:
+        - Mostrar calendario grande por semana indicando los dias en que tienen actividades
+          para descargar o cargar pedidos.
+        - Por cada dia seleccionado mostrar en la parte derecha el itinerario por dia y un
+          boton para poder imprimirlo en pdf.
+        - indicar origen/empresa, horario, descarga de pallets
+
+    - CONFIRMAR CITAS:
+        - Mostrar tabla con la lista de citas pendientes por confirmar
+        - Campos: No. de Cita, Compañia, Vehiculo, Productos, Cajas, Pallets, Operaciones [Confirmar]
+        - Definir metodo para confirmar cita
+        - Enviar correo para confirmar cita al proveedor/cliente
+        - Estatus con colores al inicio de la tabla
+        - Mostrar los diferentes iconos de cad archivo en la columna Archivo
+        - Quitar formulario de pre-ingreso y generar nuevo modulo para el pre-ingreso
+        - Agregar precio unitario
+        - Agregar boton de confirmar cita
+        - Mostrar alerta cuando una cita no ha sido confirmada antes de 2 horas
+
+COMPORTAMIENTO:
+        - Separar pre-ingreso de la confirmación de la cita
+        - genera formulario para que el cliente cargue el catalogo
+        - Indicar el anden en el resumen de la cita
+
+
+
+Autorizado sin cita en almacen->ingresos
+    - Cambiar estatus automatico si la cita no se cumplio y el cliente no ha llegado (demorada, ) colores
+    - Resultado de inspección: Rechazo completo, aceptado, cuarentena
+    - Colocar botón para ingresar mercancia después de la inspección caso contrario se rechaza o cuarentena dependiendo de la inspeccion
+
+
+
+ALMACEN
+	-LAYOUT
+		- Resumen, agregar los metros cúbicos por cada zona y área.

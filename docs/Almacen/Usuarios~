@@ -1,0 +1,23 @@
+MENU - USUARIOS
+    - Index, el principal al momento de hacer clic en usuarios (panel izquierdo)
+    - Usuarios
+        - Nuevo Usuario
+        - Permisos
+
+Descripción:
+    - Usuarios: Tabla principal donde aparecen todos los usuarios con un botón de "Nuevo Usuario" que dirige a
+        user/new y la ultima columna con botones ver perfil, editar, eliminar, permisos
+            - Nuevo usuario: muestra un formulario para dar de alta un nuevo usuario (ventana nueva sin modal)
+            - Perfil (lupa): muestra toda la información del usuario (solo lectura)
+            - Editar: Muestra formulario para editar, el mismo que nuevo usuario pero con los datos del usuario
+                    a modificar.
+            - Permisos: Muestra la pantalla del perfil del usuario pero ademas muestra un formulario para poder
+                    agregar o eliminar persmisos de acuerdo al nivel del usuario.
+            - Eliminar: No muestra Nueva ventana, muestra un popup o modal para preguntar si quiere eliminar el
+                    usuario y en la bd no se elimina el usuario, solo se desactiva el status del usuario y se sigue
+                    mostrando en la tabla principal con estatus inactivo.
+            - Activo/Inactivo: Si el icono esta coloreado significa que el usuario esta inactivo y esta opción es
+                    para reactivarlo. Si aparece en gris significa que el usuario esta activo.
+
+Comportamientos:
+            - Eliminar, No se elimina de la base de datos, solo cambia el estatus a inactivo
