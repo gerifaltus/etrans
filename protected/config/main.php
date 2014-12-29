@@ -84,8 +84,10 @@ return array(
         'db' => array(
             'connectionString' => 'mysql:host=localhost;dbname=ppt_warehouse',
             'emulatePrepare' => true,
-            'username' => 'portop_v2',
-            'password' => 'dapxK_ZQtU',
+            //'username' => 'portop_v2',  online
+            //'password' => 'dapxK_ZQtU', online
+            'username' => 'root', 
+            'password' => 'portoprint', 
             'charset' => 'utf8',
         ),
         'errorHandler' => array(

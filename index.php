@@ -4,7 +4,7 @@
 date_default_timezone_set('America/Mexico_City');
 
 // change the following paths if necessary
-$yii=dirname(__FILE__).'/../framework1.1.13/yii.php';
+$yii=dirname(__FILE__).'/../../framework1.1.13/framework/yii.php';
 $config=dirname(__FILE__).'/protected/config/main.php';
 
 // remove the following lines when in production mode
