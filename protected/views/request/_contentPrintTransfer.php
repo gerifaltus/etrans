@@ -145,7 +145,7 @@
 
 		<div class="row">
 			<!-- tabla de la transferencia -->
-			<div style="1px solid black; height: auto;">
+			<div style="border: 1px solid black; height: auto;">
 			<table class="transfer">
 			<thead>
 				<tr><th colspan="7" class="tbl_caption"><strong>C&oacute;digo - Descripci&oacute;n</strong></th></tr>

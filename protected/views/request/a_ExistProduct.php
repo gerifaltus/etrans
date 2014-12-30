@@ -2,7 +2,7 @@
     #opcionesStoreProduct-form:hover { cursor: pointer;}
     #opcionesStoreProduct-form { z-index: 1; top:200px; right: 200px}
     .marginAlamacenes {font-size: 0.8em;}
-    .sinpadding: {padding: 2px !important;}
+    .sinpadding{padding: 2px !important;}
     .lbl_existencias_radio {padding-left: 2px !important;}
 </style>
 <div class="page-content-area">

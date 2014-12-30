@@ -2,7 +2,7 @@
     #opcionesStoreProduct-form:hover { cursor: pointer;}
     #opcionesStoreProduct-form { z-index: 1; top:200px; right: 200px}
     .marginAlamacenes {font-size: 0.8em;}
-    .sinpadding: {padding: 0px !important;}
+    .sinpadding{padding: 0px !important;}
 </style>
 <div class="page-content-area">
 

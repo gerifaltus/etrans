@@ -2,7 +2,7 @@
   #opcionesStoreProduct-form:hover { cursor: pointer;}
   #opcionesStoreProduct-form { z-index: 1; top:200px; right: 200px}
   .marginAlamacenes {font-size: 0.8em;}
-  .sinpadding: {padding: 2px !important;}
+  .sinpadding {padding: 2px !important;}
   .lbl_existencias_radio {padding-left: 2px !important;}
   .tbody_search {height: 100px; overflow: auto; display: block;}
   /*#tbl_inferior {bottom: 0px; height: 100px; overflow: auto; display:block; width: 100%}*/

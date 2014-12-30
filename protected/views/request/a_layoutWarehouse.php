@@ -101,7 +101,7 @@
                                         <canvas id="container" width="1000" height="1000"></canvas>
                                     </div>
                                     <div class="col-xs-12 col-sm-2" style="border: 0px solid black;">
-                                        <div style='border:0px solid black; width:auto, heigth:300px;'>
+                                        <div style='border:0px solid black; width:auto; height:300px;'>
                                             <h4 class="blue">M&oacute;dulos del Layout</h4>
                                             <div class="form-group" id="zona" style="width:50px; height:50px; float:left; 
                                             margin: 0 0 0 20px; background-color:#ff8000; border:1px solid black; text-align:center;">
@@ -126,7 +126,7 @@
                                             <div class="clearfix"> </div>
                                         </div>
                                         <hr> 
-                                        <div style='width:auto, height:300px;'>
+                                        <div style='width:auto; height:300px;'>
                                             <h4 class="blue">Propiedades</h4>
                                             <h5 class="blue">Zona: </h5>
                                             <div id='prop_zonas' style='display:inline;'>

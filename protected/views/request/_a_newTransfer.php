@@ -561,7 +561,7 @@
                                     <tr><td colspan="4"></td></tr>
                                     <tr class="info">
                                         <td colspan="3" style="font-weight: bolder;"><p class="text-right">Total a Transferir</p></td>
-                                        <td class="text-right;"><strong>1,730</strong></td>
+                                        <td class="text-right"><strong>1,730</strong></td>
                                     </tr>
                                     </tbody>
                                 </table>
