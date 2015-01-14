@@ -31,7 +31,7 @@ return array(
         // uncomment the following to enable the Gii tool
         'gii' => array(
             'class' => 'system.gii.GiiModule',
-            'password' => 'warehouse',
+            'password' => 'portoprint',
             // If removed, Gii defaults to localhost only. Edit carefully to taste.
             'ipFilters' => array('127.0.0.1', '::1'),
             'generatorPaths' => array(
@@ -89,6 +89,7 @@ return array(
             'username' => 'root', 
             'password' => 'portoprint', 
             'charset' => 'utf8',
+            'tablePrefix' => 'etr_'
         ),
         'errorHandler' => array(
             // use 'site/error' action to display errors
@@ -114,6 +115,6 @@ return array(
     // using Yii::app()->params['paramName']
     'params' => array(
         // this is used in contact page
-        'adminEmail' => 'webmaster@example.com',
+        'adminEmail' => 'webmaster@example.com'
     ),
 );

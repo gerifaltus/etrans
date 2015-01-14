@@ -202,7 +202,7 @@ if ('ontouchstart' in document.documentElement)
 
                             <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
                                 <li>
-                                    <a href="/pptwarehouse/pptwarehouse/index.php?r=site/logout">
+                                    <a href="<?php echo Yii::app()->createUrl('site/logout'); ?>">
                                         <i class="ace-icon fa fa-power-off"></i>
                                         Logout
                                     </a>
