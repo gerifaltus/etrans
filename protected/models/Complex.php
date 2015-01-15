@@ -38,13 +38,15 @@ class Complex extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, name_short, iduser', 'required'),
-			array('name', 'length', 'max'=>25),
-			array('name_short', 'length', 'max'=>5),
-			array('date_created, iduser', 'length', 'max'=>45),
+			array('name, name_short,', 'required', 'message'=>'El campo {attribute} es requerido'),
+			array('name', 'length', 'max'=>15, 'message'=>'El {attribute} debe contener menos de 15 caracteres.'),
+			array('name_short', 'length', 'max'=>5, 'message'=>'El campo {attribute} debe contener 5 caracteres'),
+			array('date_created', 'date', 'format'=>'yyyyMMdd H:m:s'),
+                        //array('iduser', 'numerical', 'integerOnly'=>true,'message'=>'El {attribute} debe ser númerico'), 
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('idcomplex, name, name_short, date_created, iduser', 'safe', 'on'=>'search'),
+			//array('idcomplex, name, name_short, date_created, iduser', 'safe', 'on'=>'search'),
+                        array('name, name_short', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -65,11 +67,11 @@ class Complex extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'idcomplex' => 'Idcomplex',
-			'name' => 'Name',
-			'name_short' => 'Name Short',
-			'date_created' => 'Date Created',
-			'iduser' => 'Iduser',
+			'idcomplex' => 'idcomplex',
+			'name' => 'Nombre',
+			'name_short' => 'Clave',
+			'date_created' => 'Fecha Creación',
+			'iduser' => 'Creado por',
 		);
 	}
 
@@ -87,8 +89,8 @@ class Complex extends CActiveRecord
 		$criteria->compare('idcomplex',$this->idcomplex);
 		$criteria->compare('name',$this->name,true);
 		$criteria->compare('name_short',$this->name_short,true);
-		$criteria->compare('date_created',$this->date_created,true);
-		$criteria->compare('iduser',$this->iduser,true);
+		//$criteria->compare('date_created',$this->date_created,true);
+		//$criteria->compare('iduser',$this->iduser,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

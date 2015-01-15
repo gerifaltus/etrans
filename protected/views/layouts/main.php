@@ -422,7 +422,7 @@ if ('ontouchstart' in document.documentElement)
 
                         <ul class="submenu">
                             <li class="">
-                                <a href="<?php echo Yii::app()->createUrl('request/newComplex'); ?>">
+                                <a href="<?php echo Yii::app()->createUrl('complex/index'); ?>">
                                     <i class="menu-icon fa fa-caret-right"></i>
                                     Complejo
                                 </a>

@@ -6,7 +6,7 @@ class ComplexController extends Controller
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
-	public $layout='//layouts/column2';
+	//public $layout='//layouts/column2';
 
 	/**
 	 * @return array action filters
@@ -29,7 +29,7 @@ class ComplexController extends Controller
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','view'),
-				'users'=>array('*'),
+				'users'=>array('@'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
 				'actions'=>array('create','update'),
@@ -71,7 +71,9 @@ class ComplexController extends Controller
 		{
 			$model->attributes=$_POST['Complex'];
 			if($model->save())
+                        {
 				$this->redirect(array('view','id'=>$model->idcomplex));
+                        }
 		}
 
 		$this->render('create',array(
@@ -124,7 +126,7 @@ class ComplexController extends Controller
 	{
 		$dataProvider=new CActiveDataProvider('Complex');
 		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
+			'dataProvider'=>$dataProvider->getData(),
 		));
 	}
 
@@ -136,7 +138,9 @@ class ComplexController extends Controller
 		$model=new Complex('search');
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['Complex']))
+                {
 			$model->attributes=$_GET['Complex'];
+                }
 
 		$this->render('admin',array(
 			'model'=>$model,
