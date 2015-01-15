@@ -82,7 +82,7 @@ return array(
           // uncomment the following to use a MySQL database
          */
         'db' => array(
-            'connectionString' => 'mysql:host=localhost;dbname=ppt_warehouse',
+            'connectionString' => 'mysql:host=localhost;dbname=bd_etrans',
             'emulatePrepare' => true,
             //'username' => 'portop_v2',  online
             //'password' => 'dapxK_ZQtU', online
@@ -115,6 +115,7 @@ return array(
     // using Yii::app()->params['paramName']
     'params' => array(
         // this is used in contact page
-        'adminEmail' => 'webmaster@example.com'
+        'adminEmail' => 'webmaster@example.com',
+        'tablePrefix' => 'etr_'
     ),
 );

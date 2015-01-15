@@ -45,7 +45,9 @@ class LoginForm extends CFormModel {
         if (!$this->hasErrors()) {
             $this->_identity = new UserIdentity($this->username, $this->password);
             if (!$this->_identity->authenticate())
+            {
                 $this->addError('password', 'Incorrect username or password.');
+            }
         }
     }
 
@@ -63,7 +65,9 @@ class LoginForm extends CFormModel {
             Yii::app()->user->login($this->_identity, $duration);
             return true;
         } else
+        {
             return false;
+        }
     }
 
     public function getUserResetPwd($email) {

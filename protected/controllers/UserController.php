@@ -74,7 +74,9 @@ class UserController extends Controller {
         if (isset($_POST['User'])) {
             $model->attributes = $_POST['User'];
             if ($model->save())
+            {
                 $this->redirect(array('view', 'id' => $model->iduser));
+            }
         }
 
         $this->render('create', array(
@@ -100,7 +102,9 @@ class UserController extends Controller {
         if (isset($_POST['User'])) {
             $model->attributes = $_POST['User'];
             if ($model->save())
+            {
                 $this->redirect(array('view', 'id' => $model->iduser));
+            }
         }
 
         $this->render('update', array(
@@ -121,7 +125,9 @@ class UserController extends Controller {
 
         // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
         if (!isset($_GET['ajax']))
+        {
             $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+        }
     }
 
     /**
@@ -166,8 +172,11 @@ class UserController extends Controller {
     public function actionAdmin() {
         $model = new User('search');
         $model->unsetAttributes();  // clear any default values
+        
         if (isset($_GET['User']))
+        {
             $model->attributes = $_GET['User'];
+        }
 
         $this->render('admin', array(
             'model' => $model,
@@ -184,7 +193,9 @@ class UserController extends Controller {
     public function loadModel($id) {
         $model = User::model()->findByPk($id);
         if ($model === null)
+        {
             throw new CHttpException(404, 'The requested page does not exist.');
+        }
         return $model;
     }
 

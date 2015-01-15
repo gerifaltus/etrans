@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This is the model class for table "user".
+ * This is the model class for table '{{user}}'.
  *
  * The followings are the available columns in table 'user':
  * @property integer $iduser
@@ -35,7 +35,8 @@ class User extends CActiveRecord {
      * @return string the associated database table name
      */
     public function tableName() {
-        return 'user';
+        //return 'user';
+        return '{{user}}';
     }
 
     /**
