@@ -142,7 +142,13 @@ if ('ontouchstart' in document.documentElement)
 
           <!-- js para editor en linea de datatables -->
           <!--<script src="http://editor.datatables.net/media/js/dataTables.editor.min.js"></script>-->
-
+          
+          <!-- js para validar formularios html plugin jquery.validate -->
+          <script src="<?php echo Yii::app()->request->baseUrl; ?>/theme/js/jquery.validate.min.js"></script>
+          
+          <!-- js metodos adicionales para validar formularios html plugin jquery.validate -->
+          <script src="<?php echo Yii::app()->request->baseUrl; ?>/theme/js/additional-methods.min.js"></script>
+          
       </head>
 
       <body class="no-skin">
