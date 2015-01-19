@@ -40,7 +40,7 @@
 
         <div class="col-xs-12 col-sm-9">
             <div class="clearfix">
-            <?php echo $form->textField($model, 'name_short', array('size' => 3, 'maxlength' => 3, 'class' => 'col-xs-12 col-sm-3')); ?>
+            <?php echo $form->textField($model, 'name_short', array('size' => 30, 'maxlength' => 7, 'class' => 'col-xs-12 col-sm-3', 'style'=>'font-size:15px;')); ?>
             </div>
 
         <?php echo $form->error($model, 'name_short', array('class' => 'help-block')); ?>
@@ -56,6 +56,8 @@
 
 <script type="text/javascript">
     jQuery(function($) {
+        
+        /***************validacion del formulario ******************/        
         $('#complex-form').validate({
             errorElement: 'div',
             errorClass: 'help-block',
@@ -67,7 +69,8 @@
                 },
                 'Complex[name_short]': {
                     required: true,
-                    minlength: 3
+                    minlength: 5,
+                    clavesInArray: true
                 }
             },
             messages: {
@@ -77,7 +80,7 @@
                 },
                 'Complex[name_short]': {
                     required: "El campo Clave es requerido.",
-                    minlength: "El campo clave debe contener 3 caracteres."
+                    minlength: "El campo clave debe contener 5 caracteres.",
                 },
             },
             highlight: function(e) {
@@ -96,5 +99,58 @@
             invalidHandler: function(form) {
             }
         });
+        
+        
+        //funcion para validar el contenido del array claves2 y saber si existe la nueva clave a ingresar con el nuevo complejo
+        jQuery.validator.addMethod("clavesInArray", function (value, element) {
+            
+            return claves.indexOf(value) > 0 ? false: true;
+            
+        }, "La clave seleccionada ya está registrada en el sistema, <br> selecciona una diferente.");
+        
+        
+        /* fix: implementar validacion para 3 letras y 2 digitos AAA11 */
+        
+        
+        /*****************fin validacion formulario***********************/
+        
+        /***************** inicio script para typehead********************/
+        var substringMatcher = function(strs) {
+            return function findMatches(q, cb) {
+                var matches, substrRegex;
+ 
+                // an array that will be populated with substring matches
+                matches = [];
+ 
+                // regex used to determine if a string contains the substring `q`
+                substrRegex = new RegExp(q, 'i');
+ 
+                // iterate through the pool of strings and for any string that
+                // contains the substring `q`, add it to the `matches` array
+                $.each(strs, function(i, str) {
+                    if (substrRegex.test(str)) {
+                        // the typeahead jQuery plugin expects suggestions to a
+                        // JavaScript object, refer to typeahead docs for more info
+                        matches.push({value: str});
+                    }
+                });
+
+                cb(matches);
+            };
+        };
+            
+        claves = [<?php echo implode(",",$claves) ?>]
+            
+        $('#Complex_name_short').typeahead({
+            hint: true,
+            highlight: true,
+            minLength: 1
+        },
+        {
+            name: 'claves',
+            displayKey: 'value',
+            source: substringMatcher(claves)
+        });
+                /*****************fin script para typehead************************/
     });
     </script>

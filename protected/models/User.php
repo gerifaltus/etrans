@@ -64,6 +64,7 @@ class User extends CActiveRecord {
     public function relations() {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
+        //traduccion - un usuario esta ligado a una compañia: un usuario pertenece a una compañia
         return array(
             'Rcompany' => array(self::BELONGS_TO, 'Company', 'idcompany'),
             'idprofile0' => array(self::BELONGS_TO, 'Profile', 'idprofile'),

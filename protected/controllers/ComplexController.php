@@ -65,13 +65,14 @@ class ComplexController extends Controller {
         if (isset($_POST['Complex'])) {
             $model->attributes = $_POST['Complex'];
             if ($model->save()) {
-                $this->redirect(array('view', 'id' => $model->idcomplex));
+                //$this->redirect(array('view', 'id' => $model->idcomplex));
+                $this->redirect(Yii::app()->user->returnUrl = array('complex/index'));
+            }else{
+                print_r($model->getErrors());
             }
         }
-
-        $this->render('create', array(
-            'model' => $model,
-        ));
+        
+        //no se muestra nada por que se direcciona a complex/index para mostrar la lista principal
     }
 
     /**
@@ -105,8 +106,7 @@ class ComplexController extends Controller {
         $this->loadModel($id)->delete();
 
         // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-        if (!isset($_GET['ajax']))
-        {
+        if (!isset($_GET['ajax'])) {
             $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
         }
     }
@@ -115,14 +115,18 @@ class ComplexController extends Controller {
      * Lists all models.
      */
     public function actionIndex() {
-        
+
         $model = new Complex;
 
-        $dataProvider = new CActiveDataProvider('Complex');
-        
+        $dataProvider = $model->getAllComplex();
+
+        //extrae claves en data provider
+        $claves = $this->getClaves($dataProvider);
+
         $this->render('index', array(
-            'dataProvider' => $dataProvider->getData(),
-            'model' => $model)
+            'dataProvider' => $dataProvider,
+            'model' => $model,
+            'claves' => $claves)
         );
     }
 
@@ -150,8 +154,7 @@ class ComplexController extends Controller {
      */
     public function loadModel($id) {
         $model = Complex::model()->findByPk($id);
-        if ($model === null)
-        {
+        if ($model === null) {
             throw new CHttpException(404, 'The requested page does not exist.');
         }
         return $model;
@@ -166,6 +169,23 @@ class ComplexController extends Controller {
             echo CActiveForm::validate($model);
             Yii::app()->end();
         }
+    }
+
+    /**
+     * Extrae las claves de un data provider de tabla Complex
+     */
+    public function getClaves($dataProvider) {
+        
+        //$dataProvider = $dataProvider->getData();
+        $arrClaves = Array();
+        
+        foreach ($dataProvider as $data => $row) {
+
+            $arrClaves[] = "'".$row->name_short."'";
+            //echo $row->name_short;
+        }
+        
+        return $arrClaves;
     }
 
 }

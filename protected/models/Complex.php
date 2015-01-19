@@ -20,7 +20,7 @@ class Complex extends CActiveRecord
             if($this->isNewRecord)
             {
                 $this->date_created = date('Y-m-d H:i:s',time());
-                $this->iduser = Yii::app()->user->id;
+                $this->iduser = Yii::app()->user->username;
             }
             
             return true;
@@ -57,7 +57,7 @@ class Complex extends CActiveRecord
         return array(
             array('name, name_short,', 'required', 'message' => 'El campo {attribute} es requerido'),
             array('name', 'length', 'max' => 15, 'message' => 'El {attribute} debe contener menos de 15 caracteres.'),
-            array('name_short', 'length', 'max' => 3, 'message' => 'El campo {attribute} debe contener 3 caracteres'),
+            array('name_short', 'length', 'max' => 5, 'message' => 'El campo {attribute} debe contener 5 caracteres'),
             array('date_created', 'date', 'format' => 'yyyyMMdd H:m:s'),
             //array('iduser', 'numerical', 'integerOnly'=>true,'message'=>'El {attribute} debe ser númerico'), 
             // The following rule is used by search().
@@ -109,6 +109,16 @@ class Complex extends CActiveRecord
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,
         ));
+    }
+    
+    //public function getAllComplex
+    public function getAllComplex()
+    {
+        $criteria=new CDbCriteria;
+        $criteria->select='name, name_short, date_created, iduser'; 
+        $criteria->condition='is_active=:active';
+        $criteria->params=array(':active'=>1);
+        return Complex::model()->findAll($criteria);
     }
 
 }

@@ -44,6 +44,7 @@
                                 <th>Complejo</th>
                                 <th>Creado por</th>
                                 <th>Fecha</th>
+                                <th>Acci&oacute;n</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -53,6 +54,16 @@
                                 <td><?php echo $row->name; ?></td>
                                 <td><?php echo $row->iduser; ?></td>
                                 <td><?php echo $row->date_created; ?></td>
+                                <td>
+                                    <div class="hidden-sm hidden-xs action-buttons">
+                                        <a class="blue" href="#">
+                                            <i class="ace-icon fa fa-refresh bigger-130"></i>
+                                        </a>
+                                        <a class="blue" href="#">
+                                                <i class="ace-icon fa fa-trash-o bigger-130"></i>
+                                        </a>
+                                    </div>
+                                </td>
                             </tr>   
                             <?php }?>
                         </tbody>
@@ -81,7 +92,7 @@
                     <div class="col-xs-12 col-sm-12">
 
 
-                        <?php echo $this->renderPartial('_form', array('model' => $model)); ?>
+                        <?php echo $this->renderPartial('_form', array('model' => $model, 'claves'=>$claves)); ?>
 
                     </div>
                     <!--<div class="col-xs-12 col-sm-8" style="display: none;" id="box_msg">
@@ -105,23 +116,3 @@
         </div>
     </div>
 </div><!-- PAGE CONTENT ENDS -->
-
-<!-- inline scripts related to this page 
-<script type="text/javascript">
-
-    $(document).ready(function() {
-        $('#complex_table').DataTable({
-            responsive: true,
-            "oLanguage": {
-                "sInfo": "Mostrando _TOTAL_ registros (_START_ a _END_)",
-                "sEmptyTable": "No hay registros.",
-                "sInfoEmpty": "No hay registros.",
-                "sInfoFiltered": " - Filtrado de un total de  _MAX_ registros",
-                "sProcessing": "Procesando",
-                "sSearch": "Buscar:",
-                "sZeroRecords": "No hay registros",
-            },
-        });
-    });
-</script>
--->

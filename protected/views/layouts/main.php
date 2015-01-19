@@ -149,6 +149,9 @@ if ('ontouchstart' in document.documentElement)
           <!-- js metodos adicionales para validar formularios html plugin jquery.validate -->
           <script src="<?php echo Yii::app()->request->baseUrl; ?>/theme/js/additional-methods.min.js"></script>
           
+          <!-- js metodos adicionales para validar formularios html plugin jquery.validate -->
+          <script src="<?php echo Yii::app()->request->baseUrl; ?>/theme/js/typeahead.jquery.min.js"></script>
+          
       </head>
 
       <body class="no-skin">
@@ -200,7 +203,7 @@ if ('ontouchstart' in document.documentElement)
                                 <img class="nav-user-photo" src="<?php echo Yii::app()->request->baseUrl; ?>/theme/avatars/user.jpg" alt="Jason's Photo" />
                                 <span class="user-info">
                                     <small>Bienvenido,</small>
-                                    <?php echo Yii::app()->user->getIsGuest() ? 'Visitante' : Yii::app()->user->fullname; ?>
+                                    <?php echo Yii::app()->user->getIsGuest() ? 'Visitante' : Yii::app()->user->fullname." (".Yii::app()->user->username.")"; ?>
                                 </span>
 
                                 <i class="ace-icon fa fa-caret-down"></i>
