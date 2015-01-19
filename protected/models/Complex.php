@@ -19,7 +19,7 @@ class Complex extends CActiveRecord
         {
             if($this->isNewRecord)
             {
-                $this->date_created = time();
+                $this->date_created = date('Y-m-d H:i:s',time());
                 $this->iduser = Yii::app()->user->id;
             }
             

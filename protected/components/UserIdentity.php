@@ -25,6 +25,7 @@ class UserIdentity extends CUserIdentity {
         } else {
             $this->username = $record->username;
             $this->setState('fullname', $record->name.' '.$record->lastname);
+            $this->setState('id', $record->iduser);
             $this->errorCode = self::ERROR_NONE;
         }
         return !$this->errorCode;

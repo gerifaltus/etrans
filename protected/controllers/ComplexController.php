@@ -106,7 +106,9 @@ class ComplexController extends Controller {
 
         // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
         if (!isset($_GET['ajax']))
+        {
             $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+        }
     }
 
     /**
@@ -117,10 +119,11 @@ class ComplexController extends Controller {
         $model = new Complex;
 
         $dataProvider = new CActiveDataProvider('Complex');
+        
         $this->render('index', array(
             'dataProvider' => $dataProvider->getData(),
-            'model' => $model
-        ));
+            'model' => $model)
+        );
     }
 
     /**
@@ -148,7 +151,9 @@ class ComplexController extends Controller {
     public function loadModel($id) {
         $model = Complex::model()->findByPk($id);
         if ($model === null)
+        {
             throw new CHttpException(404, 'The requested page does not exist.');
+        }
         return $model;
     }
 
