@@ -61,18 +61,27 @@ class ComplexController extends Controller {
 
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
-
+        
+        $dataProvider = $model->getAllComplex();
+        
+        //extrae claves en data provider
+        $claves = $this->getClaves($dataProvider);
+        
         if (isset($_POST['Complex'])) {
             $model->attributes = $_POST['Complex'];
             if ($model->save()) {
                 //$this->redirect(array('view', 'id' => $model->idcomplex));
                 $this->redirect(Yii::app()->user->returnUrl = array('complex/index'));
             }else{
+                /**
+                 * FIX Corregir y enviar un error indicando que no se pudo guardar el complejo.
+                 */
                 print_r($model->getErrors());
             }
         }
         
-        //no se muestra nada por que se direcciona a complex/index para mostrar la lista principal
+        $this->renderPartial('_form', array('model'=>$model, 'claves'=>$claves));
+        
     }
 
     /**
@@ -80,8 +89,9 @@ class ComplexController extends Controller {
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id the ID of the model to be updated
      */
-    public function actionUpdate($id) {
-        $model = $this->loadModel($id);
+    public function actionUpdate($idcomplex) {
+        //echo $idcomplex;
+        $model = $this->loadModel($idcomplex);
 
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
@@ -89,12 +99,20 @@ class ComplexController extends Controller {
         if (isset($_POST['Complex'])) {
             $model->attributes = $_POST['Complex'];
             if ($model->save())
+            {
                 $this->redirect(array('view', 'id' => $model->idcomplex));
+            }
         }
+        
+        //print_r($model);
+        
+        $this->renderPartial('_form', array('model'=>$model, 'claves'=>''));
 
+        /*
         $this->render('update', array(
             'model' => $model,
         ));
+        */
     }
 
     /**
@@ -121,12 +139,11 @@ class ComplexController extends Controller {
         $dataProvider = $model->getAllComplex();
 
         //extrae claves en data provider
-        $claves = $this->getClaves($dataProvider);
+        //$claves = $this->getClaves($dataProvider);
 
         $this->render('index', array(
             'dataProvider' => $dataProvider,
-            'model' => $model,
-            'claves' => $claves)
+            'model' => $model)
         );
     }
 

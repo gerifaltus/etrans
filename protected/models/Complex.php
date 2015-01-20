@@ -111,11 +111,11 @@ class Complex extends CActiveRecord
         ));
     }
     
-    //public function getAllComplex
+    
     public function getAllComplex()
     {
         $criteria=new CDbCriteria;
-        $criteria->select='name, name_short, date_created, iduser'; 
+        $criteria->select='idcomplex, name, name_short, date_created, iduser'; 
         $criteria->condition='is_active=:active';
         $criteria->params=array(':active'=>1);
         return Complex::model()->findAll($criteria);

@@ -6,9 +6,14 @@
 
 <div class="form">
     <?php
+    
+    //saber si es una actualizacion o nuevo complex para desactivar campo clave
+    $disabled = $model->isNewRecord ? '' : 'disabled' ;
+    
+    
     $form = $this->beginWidget('CActiveForm', array(
         'id' => 'complex-form',
-        'action' => Yii::app()->createUrl('//complex/create'),
+        //'action' => Yii::app()->createUrl('//complex/create'),
         'enableAjaxValidation' => false,
         'enableClientValidation' => false,
         'htmlOptions' => array(
@@ -40,7 +45,7 @@
 
         <div class="col-xs-12 col-sm-9">
             <div class="clearfix">
-            <?php echo $form->textField($model, 'name_short', array('size' => 30, 'maxlength' => 7, 'class' => 'col-xs-12 col-sm-3', 'style'=>'font-size:15px;')); ?>
+            <?php echo $form->textField($model, 'name_short', array('size' => 30, 'maxlength' => 7, 'class' => 'col-xs-12 col-sm-3', 'style'=>'font-size:15px;', $disabled=>$disabled)); ?>
             </div>
 
         <?php echo $form->error($model, 'name_short', array('class' => 'help-block')); ?>
@@ -138,8 +143,11 @@
                 cb(matches);
             };
         };
-            
-        claves = [<?php echo implode(",",$claves) ?>]
+        <?php 
+        if($model->isNewRecord){?>
+            claves = [<?php echo implode(",",$claves) ?>]
+        <?php }
+        ?>
             
         $('#Complex_name_short').typeahead({
             hint: true,
