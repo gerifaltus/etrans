@@ -21,6 +21,8 @@ class Complex extends CActiveRecord
             {
                 $this->date_created = date('Y-m-d H:i:s',time());
                 $this->iduser = Yii::app()->user->username;
+            }else{
+                $this->date_created = date('Y-m-d H:i:s',time());
             }
             
             return true;
@@ -56,9 +58,9 @@ class Complex extends CActiveRecord
         // will receive user inputs.
         return array(
             array('name, name_short,', 'required', 'message' => 'El campo {attribute} es requerido'),
-            array('name', 'length', 'max' => 15, 'message' => 'El {attribute} debe contener menos de 15 caracteres.'),
+            array('name', 'length', 'max' => 20, 'message' => 'El {attribute} debe contener menos de 20 caracteres.'),
             array('name_short', 'length', 'max' => 5, 'message' => 'El campo {attribute} debe contener 5 caracteres'),
-            array('date_created', 'date', 'format' => 'yyyyMMdd H:m:s'),
+            //array('date_created', 'date', 'format' => 'yyyyMMdd H:m:s'),
             //array('iduser', 'numerical', 'integerOnly'=>true,'message'=>'El {attribute} debe ser númerico'), 
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.

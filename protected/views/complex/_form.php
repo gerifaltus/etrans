@@ -32,7 +32,7 @@
 
         <div class="col-xs-12 col-sm-9">
             <div class="clearfix">    
-            <?php echo $form->textField($model, 'name', array('size' => 25, 'maxlength' => 15, 'class' => 'col-xs-12 col-sm-6')); ?>                    
+            <?php echo $form->textField($model, 'name', array('size' => 25, 'maxlength' => 20, 'class' => 'col-xs-12 col-sm-6')); ?>                    
             </div>
 
         <?php echo $form->error($model, 'name', array('class' => 'help-block')); ?>

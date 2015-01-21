@@ -94,25 +94,24 @@ class ComplexController extends Controller {
         $model = $this->loadModel($idcomplex);
 
         // Uncomment the following line if AJAX validation is needed
-        // $this->performAjaxValidation($model);
+         //$this->performAjaxValidation($model);
 
         if (isset($_POST['Complex'])) {
             $model->attributes = $_POST['Complex'];
             if ($model->save())
             {
-                $this->redirect(array('view', 'id' => $model->idcomplex));
+                //$this->redirect(array('view', 'id' => $model->idcomplex));
+                $this->redirect(Yii::app()->user->returnUrl = array('complex/index'));
+            }else{
+                /**
+                 * FIX Corregir y enviar un error indicando que no se pudo guardar el complejo.
+                 */
+                print_r($model->getErrors());
             }
         }
         
-        //print_r($model);
-        
         $this->renderPartial('_form', array('model'=>$model, 'claves'=>''));
 
-        /*
-        $this->render('update', array(
-            'model' => $model,
-        ));
-        */
     }
 
     /**

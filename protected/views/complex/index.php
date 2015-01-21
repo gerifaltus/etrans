@@ -35,21 +35,23 @@
                 <div class="table-header">
                     Complejos Registrados
                     | <div class="btn-group btn-group-sm">
-                        <!--<a href="#newComplex-form" class="btn btn-success" id="btnusernew" data-target="#newComplex-form" data-toggle="modal">Nuevo Complejo</a>-->
+                        <a href="#newComplex-form" class="btn btn-success" id="btnComplexNew" data-target="#newComplex-form" data-toggle="modal">Nuevo Complejo</a>
+                        <!-- data-target="#newComplex-form" data-toggle="modal"-->
                         <?php
-                        echo CHtml::ajaxLink(
-                                'Nuevo Complejo', //name o icono
-                                CController::createUrl('complex/create'), 
-                                
-                                array('update' => '#divCreateComplex',
-                                      'complete' => 'function() {
-                                        $("#newComplex-form").show();
-                                      }'), 
-                                array('class'=>'btn btn-success',
-                                      'id'=>'btnusernew',
-                                      'data-target'=>'#newComplex-form',
-                                      'data-toggle'=>'modal')
-                        );
+                        /*
+                          echo CHtml::ajaxLink(
+                          'Nuevo Complejo', //name o icono
+                          CController::createUrl('complex/create'),
+
+                          array('update' => '#divCreateComplex',
+                          'complete' => 'function() {
+                          $("#newComplex-form").show(); return false;
+                          }'),
+                          array('class'=>'btn btn-success',
+                          'id'=>'btnusernew',
+                          'data-target'=>'#newComplex-form',
+                          'data-toggle'=>'modal')
+                          ); */
                         ?>
                     </div>
                 </div>
@@ -66,33 +68,34 @@
                         </thead>
                         <tbody>
                             <?php foreach ($dataProvider as $data => $row) { ?>
-                            <tr>
-                                <td><?php echo $row->name_short; ?></td>
-                                <td><?php echo $row->name; ?></td>
-                                <td><?php echo $row->iduser; ?></td>
-                                <td><?php echo $row->date_created; ?></td>
-                                <td>
-                                    <div class="hidden-sm hidden-xs action-buttons">
-                                        <!--<a class="blue" href="#" data-upd-idcomplex="<?php //echo $row->idcomplex?>">
-                                            <i class="ace-icon fa fa-pencil-square-o bigger-130"></i>
-                                        </a>-->
-                                        <?php echo CHtml::ajaxLink(
-                                                '<i class="ace-icon fa fa-pencil-square-o bigger-130"></i>', //name o icono
-                                                CController::createUrl('complex/update', array('idcomplex'=>$row->idcomplex)),
-                                                array('update'=>'#divUpdateComplex')
-                                                );
-                                        ?>
-                                        
-                                        <?php echo CHtml::link('<i class="ace-icon fa fa-trash-o bigger-130"></i> ',array('controller/action',
-                                         'idcomplex'=>$row->idcomplex)); ?>
-                                        
-                                        <!--<a class="blue" href="#" data-del-idcomplex="<?php //echo $row->idcomplex?>">
-                                                <i class="ace-icon fa fa-trash-o bigger-130"></i>-->
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>   
-                            <?php }?>
+                                <tr>
+                                    <td><?php echo $row->name_short; ?></td>
+                                    <td><?php echo $row->name; ?></td>
+                                    <td><?php echo $row->iduser; ?></td>
+                                    <td><?php echo $row->date_created; ?></td>
+                                    <td>
+                                        <div class="hidden-sm hidden-xs action-buttons">
+                                            <a class="blue editComplex" href="#" data-upd-idcomplex="<?php echo $row->idcomplex ?>" data-target="#updateComplex-form" data-toggle="modal">
+                                                <i class="ace-icon fa fa-pencil-square-o bigger-130"></i>
+                                            </a>
+                                            <?php /* echo CHtml::ajaxLink(
+                                              '<i class="ace-icon fa fa-pencil-square-o bigger-130"></i>', //name o icono
+                                              CController::createUrl('complex/update', array('idcomplex'=>$row->idcomplex)),
+                                              array('update'=>'#divUpdateComplex')
+                                              ); */
+                                            ?>
+
+                                            <?php //echo CHtml::link('<i class="ace-icon fa fa-trash-o bigger-130"></i> ', array('controller/action',
+                                                //'idcomplex' => $row->idcomplex));
+                                            ?>
+
+                                            <a class="blue delComplex" href="#" data-del-idcomplex="<?php echo $row->idcomplex ?>">
+                                            <i class="ace-icon fa fa-trash-o bigger-130"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>   
+                            <?php } ?>
                         </tbody>
                     </table>
                 </div>
@@ -116,27 +119,8 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-xs-12 col-sm-12" id="divCreateComplex">
-
-
-                        <?php //echo $this->renderPartial('_form', array('model' => $model, 'claves'=>$claves)); ?>
-
+                        
                     </div>
-                    <!--<div class="col-xs-12 col-sm-8" style="display: none;" id="box_msg">
-                        <h5 class="header smaller" style="border-bottom:0px; display: none;" id="img_procesing">
-                            <i class="ace-icon fa fa-spinner fa-spin blue bigger-125"></i>
-                            Procesando petici&oacute;n....
-                        </h5>
-                        <div class="alert alert-danger" style="display: block;" id="msg_alert">
-                            <p>
-
-                            </p>    
-                        </div>
-                        <div class="alert alert-block alert-success" style="display: block;" id="msg_sucess">
-                            <p>
-
-                            </p>
-                        </div>
-                    </div>-->
                 </div>
             </div>     
         </div>
@@ -155,29 +139,91 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-xs-12 col-sm-12" id="divUpdateComplex">
-
-
-                        <?php //echo $this->renderPartial('_form', array('model' => $model,  'claves'=>$claves)); ?>
-
+                        
                     </div>
-                    <!--<div class="col-xs-12 col-sm-8" style="display: none;" id="box_msg">
-                        <h5 class="header smaller" style="border-bottom:0px; display: none;" id="img_procesing">
-                            <i class="ace-icon fa fa-spinner fa-spin blue bigger-125"></i>
-                            Procesando petici&oacute;n....
-                        </h5>
-                        <div class="alert alert-danger" style="display: block;" id="msg_alert">
-                            <p>
-
-                            </p>    
-                        </div>
-                        <div class="alert alert-block alert-success" style="display: block;" id="msg_sucess">
-                            <p>
-
-                            </p>
-                        </div>
-                    </div>-->
                 </div>
             </div>     
         </div>
     </div>
 </div><!-- PAGE CONTENT ENDS -->
+
+<div id="delComplex-confirm" class="hide">
+    <div class="alert alert-info bigger-110">
+        ¿Est&aacute; seguro de eliminar el Complejo Seleccionado?
+    </div>
+<!--
+    <div class="space-6"></div>
+
+    <p cl   ass="bigger-110 bolder center grey">
+        <i class="ace-icon fa fa-hand-o-right blue bigger-120"></i>
+        Are you sure?
+    </p>-->
+</div><!-- #dialog-confirm -->
+
+<script type="text/javascript">
+    jQuery(function($) {
+        
+        $('#btnComplexNew').on("click", showCreateComplex); 
+        
+        $('#complex_table tbody tr').on("click", "a.editComplex", showUpdateComplex);
+        
+        
+        //muestra ventana modal para registrar complex
+        function showCreateComplex()
+        {
+            $.ajax({
+                url: "<?php echo Yii::app()->createUrl('complex/create'); ?>",
+                type: "GET",
+                data: {
+                    },
+                success: function(data) {
+                    $('#divCreateComplex').html(data);
+                }
+            });
+        }
+        
+        function showUpdateComplex()
+        {
+            $.ajax({
+                url: "<?php echo Yii::app()->createUrl('complex/update'); ?>",
+                type: "GET",
+                data: {
+                    'idcomplex': $(this).data("upd-idcomplex")
+                    },
+                success: function(data) {
+                    $('#divUpdateComplex').html(data);
+                }
+            });
+        }
+
+				$( "#complex_table tbody tr" ).on('click', 'a.delComplex',function(e) {
+					e.preventDefault();
+				
+					$( "#delComplex-confirm" ).removeClass('hide').dialog({
+						resizable: false,
+						modal: true,
+						/*title: "<div class='widget-header'><h4 class='smaller'><i class='ace-icon fa fa-exclamation-triangle red'></i> Empty the recycle bin?</h4></div>",
+						title_html: true,*/
+						buttons: [
+							{
+								html: "<i class='ace-icon fa fa-trash-o bigger-110'></i>&nbsp; Elimiar",
+								"class" : "btn btn-danger btn-xs",
+								click: function() {
+                                                                    
+									$( this ).dialog( "close" );
+								}
+							}
+							,
+							{
+								html: "<i class='ace-icon fa fa-times bigger-110'></i>&nbsp; Cancel",
+								"class" : "btn btn-xs",
+								click: function() {
+									$( this ).dialog( "close" );
+								}
+							}
+						]
+					});
+				});
+
+    });
+</script>
