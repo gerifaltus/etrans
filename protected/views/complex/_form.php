@@ -53,10 +53,18 @@
     </div>
     
     <div class="modal-footer">
-        <?php echo CHtml::submitButton($model->isNewRecord ? 'Crear' : 'Guardar', array('class' => 'btn btn-sm btn-primary')); ?>
+        <?php         
+        echo CHtml::submitButton($model->isNewRecord ? 'Crear' : 'Guardar', array('class' => 'btn btn-sm btn-primary')); ?>
     </div>
 
-<?php $this->endWidget(); ?>
+<?php $this->endWidget(); 
+/*        
+echo CHtml::link('<i class="ace-icon fa fa-trash-o bigger-110"> Eliminar</i>' , array('complex/delete', 'idcomplex' => $model->idcomplex), array(
+            'submit' => array('complex/delete', 'idcomplex' => $model->idcomplex),
+            'class' => 'btn btn-sm btn-danger', 'confirm' => 'Est&aacute; seguro de querer eliminar el Complejo seleccionado?'
+                )
+        );*/
+?>
 </div><!-- form -->
 
 <script type="text/javascript">

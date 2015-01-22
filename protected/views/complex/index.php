@@ -78,19 +78,22 @@
                                             <a class="blue editComplex" href="#" data-upd-idcomplex="<?php echo $row->idcomplex ?>" data-target="#updateComplex-form" data-toggle="modal">
                                                 <i class="ace-icon fa fa-pencil-square-o bigger-130"></i>
                                             </a>
-                                            <?php /* echo CHtml::ajaxLink(
-                                              '<i class="ace-icon fa fa-pencil-square-o bigger-130"></i>', //name o icono
-                                              CController::createUrl('complex/update', array('idcomplex'=>$row->idcomplex)),
-                                              array('update'=>'#divUpdateComplex')
-                                              ); */
+                                            <?php
+                                            /*echo CHtml::ajaxLink(
+                                              '<i class="ace-icon fa fa-trash-o bigger-130"></i>', //name o icono
+                                              CController::createUrl('delete'),
+                                              array(
+                                                    'type' => 'GET',
+                                                    'data' => array('idcomplex' => $row->idcomplex,
+                                                                    'action' => 'delete'),
+                                                    'submit' => array('complex/delete', 'idcomplex'=>$row->idcomplex)
+                                                  ),
+                                              array('class'=>'blue',
+                                                    'confirm'=>'Seguro de eliminar?')
+                                                    ); */
                                             ?>
-
-                                            <?php //echo CHtml::link('<i class="ace-icon fa fa-trash-o bigger-130"></i> ', array('controller/action',
-                                                //'idcomplex' => $row->idcomplex));
-                                            ?>
-
                                             <a class="blue delComplex" href="#" data-del-idcomplex="<?php echo $row->idcomplex ?>">
-                                            <i class="ace-icon fa fa-trash-o bigger-130"></i>
+                                                <i class="ace-icon fa fa-trash-o bigger-130"></i>
                                             </a>
                                         </div>
                                     </td>
@@ -158,6 +161,22 @@
         <i class="ace-icon fa fa-hand-o-right blue bigger-120"></i>
         Are you sure?
     </p>-->
+<div class="col-xs-12 col-sm-8" style="display: none;" id="box_msg">
+    <h5 class="header smaller" style="border-bottom:0px; display: none;" id="img_procesing">
+        <i class="ace-icon fa fa-spinner fa-spin blue bigger-125"></i>
+        Procesando petici&oacute;n....
+    </h5>
+    <div class="alert alert-danger" style="display: block;" id="msg_alert">
+        <p>
+
+        </p>    
+    </div>
+    <div class="alert alert-block alert-success" style="display: block;" id="msg_sucess">
+        <p>
+
+        </p>
+    </div>
+</div>
 </div><!-- #dialog-confirm -->
 
 <script type="text/javascript">
@@ -195,8 +214,71 @@
                 }
             });
         }
+        
+        function delComplexId(idcomplex, dial)
+        {
+            //alert('ajax');
+            $.ajax({
+                url: "<?php echo Yii::app()->createUrl('complex/delete'); ?>",
+                type: "GET",
+                data: {
+                    'idcomplex': idcomplex
+                },
+                beforeSend: function() {
+                    $('#box_msg').show();
+                    $('#msg_sucess').hide();
+                    $('#msg_alert').hide();
+                    $('#img_procesing').show();
+                },
+                success: function(data) {
+                    $(dial).dialog('close');
+                    window.location.href='index.php?r=complex/index';
+                },
+                error: function(data) {
+                    $('#img_procesing').hide();
+                    $('#msg_alert p').append(data);
+                    $('#msg_alert').show();
+                }
+            });
+        }
+        
+        
+        /*
+        * data: {
+                'username': user,
+                'email': email
+            },
+            beforeSend: function() {
+                $('#box_msg').show();
+                $('#msg_sucess').hide();
+                $('#msg_alert').hide();
+                $('#img_procesing').show();
+            },
+            success: function(data) {
+                $('#img_procesing').hide();
+                if (data.error === true)
+                {
+                    $('#msg_alert p').append(data.msg);
+                    $('#msg_sucess').hide();
+                    $('#msg_alert').show();
+                } else {
+                    $('#msg_alert').hide();
+                    $('#msg_sucess p').append(data.msg)
+                    $('#msg_sucess').show();
+                }
+            },
+            error: function(data) {
+                $('#img_procesing').hide();
+                $('#msg_alert p').append(data.msg);
+                $('#msg_alert').show();
+            }
+        * 
+         */
+        
 
-				$( "#complex_table tbody tr" ).on('click', 'a.delComplex',function(e) {
+				$( "#complex_table tbody tr" ).on('click', 'a.delComplex', function(e) {
+                                        var idcomplex = $(this).data('del-idcomplex');
+                                        
 					e.preventDefault();
 				
 					$( "#delComplex-confirm" ).removeClass('hide').dialog({
@@ -210,7 +292,7 @@
 								"class" : "btn btn-danger btn-xs",
 								click: function() {
                                                                     
-									$( this ).dialog( "close" );
+									delComplexId(idcomplex, $(this));
 								}
 							}
 							,
