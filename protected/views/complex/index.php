@@ -242,39 +242,6 @@
             });
         }
         
-        
-        /*
-        * data: {
-                'username': user,
-                'email': email
-            },
-            beforeSend: function() {
-                $('#box_msg').show();
-                $('#msg_sucess').hide();
-                $('#msg_alert').hide();
-                $('#img_procesing').show();
-            },
-            success: function(data) {
-                $('#img_procesing').hide();
-                if (data.error === true)
-                {
-                    $('#msg_alert p').append(data.msg);
-                    $('#msg_sucess').hide();
-                    $('#msg_alert').show();
-                } else {
-                    $('#msg_alert').hide();
-                    $('#msg_sucess p').append(data.msg)
-                    $('#msg_sucess').show();
-                }
-            },
-            error: function(data) {
-                $('#img_procesing').hide();
-                $('#msg_alert p').append(data.msg);
-                $('#msg_alert').show();
-            }
-        * 
-         */
-        
 
 				$( "#complex_table tbody tr" ).on('click', 'a.delComplex', function(e) {
                                         var idcomplex = $(this).data('del-idcomplex');

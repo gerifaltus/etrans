@@ -78,7 +78,7 @@ echo CHtml::link('<i class="ace-icon fa fa-trash-o bigger-110"> Eliminar</i>' , 
             rules: {
                 'Complex[name]': {
                     required: true,
-                    maxlength: 15
+                    maxlength: 20
                 },
                 'Complex[name_short]': {
                     required: true,
