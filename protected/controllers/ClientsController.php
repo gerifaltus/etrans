@@ -114,8 +114,12 @@ class ClientsController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Clients');
-		$this->render('index',array(
+            $model = new Clients;
+
+            $dataProvider = $model->getAllClients();
+            
+           //$dataProvider=new CActiveDataProvider('Clients');
+            $this->render('index', array(
 			'dataProvider'=>$dataProvider,
 		));
 	}

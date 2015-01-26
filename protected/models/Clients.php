@@ -103,4 +103,13 @@ class Clients extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+        
+        public function getAllClients()
+        {
+            $criteria=new CDbCriteria;
+            $criteria->select='*'; 
+            $criteria->condition='is_inactive=:inactive';
+            $criteria->params=array(':inactive'=>0);
+            return Clients::model()->findAll($criteria);
+        }
 }

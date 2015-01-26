@@ -56,7 +56,7 @@
                     </div>
                 </div>
                 <div>
-                    <table id="complex_table" class="table table-striped table-bordered table-hover tbl-display">
+                    <table id="complex_table" class="table table-striped table-bordered table-hover">
                         <thead>
                             <tr>
                                 <th>Clave</th>
@@ -74,7 +74,7 @@
                                     <td><?php echo $row->iduser; ?></td>
                                     <td><?php echo $row->date_created; ?></td>
                                     <td>
-                                        <div class="hidden-sm hidden-xs action-buttons">
+                                        <div class="action-buttons">
                                             <a class="blue editComplex" href="#" data-upd-idcomplex="<?php echo $row->idcomplex ?>" data-target="#updateComplex-form" data-toggle="modal">
                                                 <i class="ace-icon fa fa-pencil-square-o bigger-130"></i>
                                             </a>
@@ -136,7 +136,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="blue bigger">Ingresar informaci&oacute;n para crear nuevo Complejo</h4>
+                <h4 class="blue bigger">Actualizar informaci&oacute;n del Complejo</h4>
             </div>
 
             <div class="modal-body">
@@ -273,6 +273,19 @@
 						]
 					});
 				});
+                                
+        $('#complex_table').DataTable({
+            responsive: true,
+            "oLanguage": {
+                "sInfo": "Mostrando _TOTAL_ registros (_START_ a _END_)",
+                "sEmptyTable": "No hay registros.",
+                "sInfoEmpty": "No hay registros.",
+                "sInfoFiltered": " - Filtrado de un total de  _MAX_ registros",
+                "sProcessing": "Procesando",
+                "sSearch": "Buscar:",
+                "sZeroRecords": "No hay registros",
+            },
+        });
 
     });
 </script>
