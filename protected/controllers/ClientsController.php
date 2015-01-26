@@ -15,7 +15,7 @@ class ClientsController extends Controller
 	{
 		return array(
 			'accessControl', // perform access control for CRUD operations
-			'postOnly + delete', // we only allow deletion via POST request
+			//'postOnly + delete', // we only allow deletion via POST request
 		);
 	}
 
@@ -63,12 +63,13 @@ class ClientsController extends Controller
 		{
 			$model->attributes=$_POST['Clients'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->idclient));
+                        {
+                            //$this->redirect(array('view','id'=>$model->idclient));
+                            $this->redirect(Yii::app()->user->returnUrl = array('clients/index'));
+                        }
 		}
 
-		$this->render('create',array(
-			'model'=>$model,
-		));
+                $this->renderPartial('_form', array('model'=>$model));
 	}
 
 	/**
@@ -87,12 +88,16 @@ class ClientsController extends Controller
 		{
 			$model->attributes=$_POST['Clients'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->idclient));
+                        {
+                            //$this->redirect(array('view','id'=>$model->idclient));
+                            $this->redirect(Yii::app()->user->returnUrl = array('clients/index'));
+                        }
 		}
 
-		$this->render('update',array(
+		/*$this->render('update',array(
 			'model'=>$model,
-		));
+		));*/
+                $this->renderPartial('_form', array('model'=>$model));
 	}
 
 	/**
@@ -106,7 +111,10 @@ class ClientsController extends Controller
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if(!isset($_GET['ajax']))
-			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+                {
+                    //$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+                    $this->redirect(Yii::app()->user->returnUrl = array('clients/index'));
+                }
 	}
 
 	/**

@@ -13,7 +13,6 @@
     
     $form = $this->beginWidget('CActiveForm', array(
         'id' => 'complex-form',
-        //'action' => Yii::app()->createUrl('//complex/create'),
         'enableAjaxValidation' => false,
         'enableClientValidation' => false,
         'htmlOptions' => array(
