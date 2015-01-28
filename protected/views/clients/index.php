@@ -114,7 +114,6 @@ $this->widget('zii.widgets.CListView', array(
                         </tbody>
                     </table>
                 </div>
-
             </div>
             <!-- PAGE CONTENT ENDS -->
         </div>

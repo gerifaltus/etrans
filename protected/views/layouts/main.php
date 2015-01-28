@@ -29,7 +29,7 @@
                 <link rel="stylesheet" type="text/css" media="screen" href="<?php echo Yii::app()->request->baseUrl; ?>/theme/css/ace-rtl.min.css" />
 
                 <!-- css para datatables -->
-                <link rel="stylesheet" type="text/css" media="screen" href="<?php echo Yii::app()->request->baseUrl; ?>/theme/css/dataTables.bootstrap.css" />
+                <!--<link rel="stylesheet" type="text/css" media="screen" href="<?php //echo Yii::app()->request->baseUrl; ?>/theme/css/dataTables.bootstrap.css" />-->
                 <link rel="stylesheet" type="text/css" media="screen" href="<?php echo Yii::app()->request->baseUrl; ?>/theme/css/dataTables.responsive.css" />
 
                 <!-- css para datepicker-->

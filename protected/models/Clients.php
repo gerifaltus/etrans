@@ -112,4 +112,6 @@ class Clients extends CActiveRecord
             $criteria->params=array(':inactive'=>0);
             return Clients::model()->findAll($criteria);
         }
+                
 }
+
