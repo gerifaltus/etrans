@@ -5,7 +5,7 @@
  *
  * The followings are the available columns in table '{{product}}':
  * @property integer $idproduct
- * @property string $datetime
+ * @property string $created_at
  * @property integer $idclient
  * @property string $code
  * @property string $item
@@ -53,20 +53,21 @@ class Product extends CActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('datetime, idclient, code, item, idcategory, pu', 'required'),
-            array('idclient, idcategory, heigth, depth, width, weight, stowmax, heigthpallet, weightpallet', 'numerical', 'integerOnly' => true),
-            array('code, item', 'length', 'max' => 15),
+            array('idclient, code, idcategory, pu', 'required'),
+            array('idclient, idcategory, pxc, code', 'numerical', 'integerOnly' => true),
+            array('pu, heigth, depth, width, weight, stowmax, heigthpallet, weightpallet', 'match', 'pattern' => '^([0-9]+)(\.){1}([0-9]+)*$'), //valida numeros con decimales
+            array('code', 'length', 'max' => 15),
             array('description', 'length', 'max' => 25),
-            array('presentation, pxc', 'length', 'max' => 45),
-            array('image', 'length', 'max' => 20),
-            array('pu', 'length', 'max' => 6),
-            array('expiration', 'safe'),
+            /*array('image', 'length', 'max' => 20),*/
+            array('image', 'file', 'types'=>'jpg, gif, png, jpeg'),
+            //array('pu', 'length',),
+            //array('expiration', 'safe'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
             array('idproduct, datetime, idclient, code, item, idcategory, description, presentation, image, pu, pxc, expiration, heigth, depth, width, weight, stowmax, heigthpallet, weightpallet', 'safe', 'on' => 'search'),
         );
     }
-
+       
     /**
      * @return array relational rules.
      */
@@ -74,8 +75,8 @@ class Product extends CActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'R_idclient' => array(self::BELONGS_TO, 'Clients', 'idclient'),
-            'R_idcategory' => array(self::BELONGS_TO, 'ProductCategory', 'idcategory'),
+            'R_client' => array(self::BELONGS_TO, 'Clients', 'idclient'),
+            'R_category' => array(self::BELONGS_TO, 'ProductCategory', 'idcategory'),
         );
     }
 
@@ -85,7 +86,7 @@ class Product extends CActiveRecord {
     public function attributeLabels() {
         return array(
             'idproduct' => 'Idproducto',
-            'datetime' => 'Registrado',
+            'created_at' => 'Registrado',
             'idclient' => 'Proveedor',
             'code' => 'Código',
             'item' => 'Item',
@@ -100,10 +101,11 @@ class Product extends CActiveRecord {
             'depth' => 'Profundidad',
             'width' => 'Ancho',
             'weight' => 'Peso',
-            'stowmax' => 'Estiba Max',
+            'stowmax' => 'Estiba M&aacute;xima Cajas',
             'heigthpallet' => 'Heigthpallet',
             'weightpallet' => 'Weightpallet',
             'is_inactive' => 'Inactivo',
+            'created_by' => 'Registrado por',
         );
     }
 
@@ -118,7 +120,7 @@ class Product extends CActiveRecord {
         $criteria = new CDbCriteria;
 
         $criteria->compare('idproduct', $this->idproduct);
-        $criteria->compare('datetime', $this->datetime, true);
+        $criteria->compare('created_at', $this->created_at, true);
         $criteria->compare('idclient', $this->idclient);
         $criteria->compare('code', $this->code, true);
         $criteria->compare('item', $this->item, true);
@@ -137,6 +139,7 @@ class Product extends CActiveRecord {
         $criteria->compare('heigthpallet', $this->heigthpallet);
         $criteria->compare('weightpallet', $this->weightpallet);
         $criteria->compare('is_inactive', $this->is_inactive);
+        $criteria->compare('created_by', $this->created_by);
 
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,
@@ -145,11 +148,11 @@ class Product extends CActiveRecord {
 
     public function getAllProducts() {
         $criteria = new CDbCriteria;
-        $criteria->select = 'idproduct, code, item, pu, pxc, description, presentation, category, cliente';
-        $criteria->with = array('R_idcategory' => array('together' => true, 'select' => array('name_cat')),
-                                'R_idclient' => array('together' => true, 'select' => array('name_client'))
+        $criteria->select = 't.idproduct, t.code, t.item, t.pu, t.pxc, t.description, t.presentation';
+        $criteria->with = array('R_category' => array('together' => true, 'select' => array('name_cat')),
+                                'R_client' => array('together' => true, 'select' => array('name_client'))
                                 );
-        $criteria->condition = 'is_inactive=:inactive';
+        $criteria->condition = 't.is_inactive=:inactive';
         $criteria->params = array(':inactive' => 0);
         return $this->findAll($criteria);
     }

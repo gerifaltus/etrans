@@ -59,6 +59,10 @@ class ProductController extends Controller {
      */
     public function actionCreate() {
         $model = new Product;
+        
+        //extrae los clientes
+        $clientes = Clients::model()->findAll(array('select' => 'idclient, name_client'));
+        $categoria = ProductCategory::model()->findAll(array('select' => 'idcategory, name_cat'));
 
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
@@ -69,8 +73,10 @@ class ProductController extends Controller {
                 $this->redirect(array('view', 'id' => $model->idproduct));
         }
 
-        $this->render('create', array(
+        $this->renderPartial('_form', array(
             'model' => $model,
+            'clientes' => $clientes,
+            'categoria' => $categoria
         ));
     }
 
