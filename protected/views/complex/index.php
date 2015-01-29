@@ -150,6 +150,7 @@
     </div>
 </div><!-- PAGE CONTENT ENDS -->
 
+
 <div id="delComplex-confirm" class="hide">
     <div class="alert alert-info bigger-110">
         ¿Est&aacute; seguro de eliminar el Complejo Seleccionado?

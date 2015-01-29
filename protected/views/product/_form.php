@@ -29,7 +29,9 @@
             <?php echo $form->labelEx($model, 'Proveedor', array('class' => 'col-sm-3 control-label no-padding-right')); ?>
 
             <div class="col-sm-9">
-                <?php echo $form->dropDownList($model, 'idclient', CHtml::listData($clientes, 'idclient', 'name_client'), array('prompt' => 'Seleccione un elemento')); ?>
+                <div class="clearfix">
+                    <?php echo $form->dropDownList($model, 'idclient', CHtml::listData($clientes, 'idclient', 'name_client'), array('prompt' => 'Seleccione un elemento')); ?>
+                </div>
                 <?php echo $form->error($model, 'idclient'); ?>
             </div>
         </div>
@@ -38,7 +40,9 @@
             <?php echo $form->labelEx($model, 'code', array('class' => 'col-sm-3 control-label no-padding-right')); ?>
 
             <div class="col-sm-9">
-                <?php echo $form->textField($model, 'code', array('class' => "col-xs-10 col-sm-5")); ?>
+                <div class="clearfix">
+                    <?php echo $form->textField($model, 'code', array('class' => "col-xs-10 col-sm-5")); ?>
+                </div>
                 <?php echo $form->error($model, 'code'); ?>
             </div>
         </div>
@@ -47,15 +51,19 @@
             <?php echo $form->labelEx($model, 'description', array('class' => 'col-sm-3 control-label no-padding-right')); ?>
 
             <div class="col-sm-9">
-                <?php echo $form->textField($model, 'description', array('class' => 'form-control')); ?>
+                <div class="clearfix">
+                    <?php echo $form->textField($model, 'description', array('class' => 'form-control')); ?>
+                </div>
                 <?php echo $form->error($model, 'description'); ?>
             </div>
         </div>
 
         <div class="form-group">
-                <?php echo $form->labelEx($model, 'idcategory', array('class' => 'col-sm-3 control-label no-padding-right')); ?>
+                <?php echo $form->labelEx($model, 'Categor&iacute;a', array('class' => 'col-sm-3 control-label no-padding-right')); ?>
             <div class="col-sm-9">
-                <?php echo $form->dropDownList($model, 'idcategory', CHtml::listData($categoria, 'idcategory', 'name_cat'), array('prompt' => 'Seleccione un elemento', 'class' => 'col-xs-10 col-sm-8')); ?>
+                <div class="clearfix">
+                    <?php echo $form->dropDownList($model, 'idcategory', CHtml::listData($categoria, 'idcategory', 'name_cat'), array('prompt' => 'Seleccione un elemento', 'class' => 'col-xs-10 col-sm-8')); ?>
+                </div>
                 <?php echo $form->error($model, 'idcategory'); ?>
             </div>
         </div>
@@ -64,18 +72,20 @@
                 <?php echo $form->labelEx($model, 'pxc', array('class' => 'col-sm-3 control-label no-padding-right')); ?>
 
             <div class="col-sm-9">
-                <?php echo $form->textField($model, 'pxc', array('class' => 'col-xs-10 col-sm-5')); ?>
+                <div class="clearfix">
+                    <?php echo $form->textField($model, 'pxc', array('class' => 'col-xs-10 col-sm-5')); ?>
+                </div>
                 <?php echo $form->error($model, 'pxc'); ?>
             </div>
         </div>
-    </div>
-
-    <div class="col-xs-12 col-sm-6">
+        
         <div class="form-group">
             <?php echo $form->labelEx($model, 'image', array('class' => 'col-sm-3 control-label no-padding-right')); ?>
 
             <div class="col-sm-9">
-                <?php echo $form->fileField($model, 'image', array('class' => 'id-input-file-2')); ?>
+                <div class="clearfix">
+                    <?php echo $form->fileField($model, 'image', array('class' => 'id-input-file-2')); ?>
+                </div>
                 <?php echo $form->error($model, 'image'); ?>
             </div>
         </div>        
@@ -84,16 +94,22 @@
             <?php echo $form->labelEx($model, 'pu', array('class' => 'col-sm-3 control-label no-padding-right')); ?>
 
             <div class="col-sm-9">
-                <?php echo $form->textField($model, 'pu', array('class' => 'col-xs-10 col-sm-5')); ?>
+                <div class="clearfix">
+                    <?php echo $form->textField($model, 'pu', array('class' => 'col-xs-10 col-sm-5')); ?>
+                </div>
                 <?php echo $form->error($model, 'pu'); ?>
             </div>
         </div>
+    </div>
 
+    <div class="col-xs-12 col-sm-6">
         <div class="form-group">
                 <?php echo $form->labelEx($model, 'heigth', array('class' => 'col-sm-3 control-label no-padding-right')); ?>
 
             <div class="col-sm-9">
+                <div class="clearfix">
                 <?php echo $form->textField($model, 'heigth', array('class' => 'col-xs-10 col-sm-2')); ?>Cm
+                </div>
                 <?php echo $form->error($model, 'heigth'); ?>
             </div>
         </div>
@@ -102,7 +118,9 @@
                 <?php echo $form->labelEx($model, 'depth', array('class' => 'col-sm-3 control-label no-padding-right')); ?>
 
             <div class="col-sm-9">
-                <?php echo $form->textField($model, 'depth', array('class' => 'col-xs-10 col-sm-2')); ?>Cm
+                <div class="clearfix">
+                    <?php echo $form->textField($model, 'depth', array('class' => 'col-xs-10 col-sm-2')); ?>Cm
+                </div>
                 <?php echo $form->error($model, 'depth'); ?>
             </div>
         </div>
@@ -111,7 +129,9 @@
                 <?php echo $form->labelEx($model, 'width', array('class' => 'col-sm-3 control-label no-padding-right')); ?>
 
             <div class="col-sm-9">
-                <?php echo $form->textField($model, 'width', array('class' => 'col-xs-10 col-sm-2')); ?>
+                <div class="clearfix">
+                    <?php echo $form->textField($model, 'width', array('class' => 'col-xs-10 col-sm-2')); ?>
+                </div>
                 <?php echo $form->error($model, 'width'); ?>
             </div>
         </div>
@@ -120,7 +140,9 @@
             <?php echo $form->labelEx($model, 'weight', array('class' => 'col-sm-3 control-label no-padding-right')); ?>
 
             <div class="col-sm-9">
-                <?php echo $form->textField($model, 'weight', array('class' => 'col-xs-10 col-sm-2')); ?>
+                <div class="clearfix">
+                    <?php echo $form->textField($model, 'weight', array('class' => 'col-xs-10 col-sm-2')); ?>
+                </div>
                 <?php echo $form->error($model, 'weight'); ?>
             </div>
         </div>
@@ -129,7 +151,9 @@
             <?php echo $form->labelEx($model, 'stowmax', array('class' => 'col-sm-3 control-label no-padding-right')); ?>
 
             <div class="col-sm-9">
-                <?php echo $form->textField($model, 'stowmax', array('class' => 'col-xs-10 col-sm-5')); ?>
+                <div class="clearfix">
+                    <?php echo $form->textField($model, 'stowmax', array('class' => 'col-xs-10 col-sm-5')); ?>
+                </div>
                 <?php echo $form->error($model, 'stowmax'); ?>
             </div>
         </div>
@@ -146,7 +170,89 @@
 <script type="text/javascript">
 
     $(document).ready(function() {
-
+        
+        /***************validacion del formulario ******************/        
+        $('#product-form').validate({
+            errorElement: 'div',
+            errorClass: 'help-block',
+            focusInvalid: false,
+            rules: {
+                'Product[idclient]': {
+                    required: true,
+                    number: true
+                },
+                'Product[code]': {
+                    required: true,
+                    number: true,
+                    maxlength: 15
+                },
+                'Product[description]':{
+                    required: true,
+                    maxlength: 45
+                },
+                'Product[idcatetory]':{
+                    required: true,
+                    number: true
+                },
+                'Product[pu]':{
+                    required: true,
+                    number: true
+                },
+                'Product[pxc]':{
+                    number: true
+                }
+            },
+            messages: {
+                'Product[idclient]': {
+                    required: "El campo Proveedor es requerido.",
+                    number: "Sólo se permiten numeros"
+                    
+                },
+                'Product[code]': {
+                    required: "El campo Código es requerido.",
+                    number: "Sólo se permiten numeros",
+                    maxlength: "Máximo 15 digitos",
+                },
+                'Product[description]': {
+                    required: "El campo Descripción es requerido",
+                    maxlength: "Maximo 25 caracteres.",
+                },
+                'Product[idcategory]': {
+                    required: "El campo Categoría es requerido",
+                    number: "Sólo se permiten numeros"
+                },
+                'Product[pu]': {
+                    required: "El campo PU es requerido.",
+                    number: "Sólo se permiten numeros"
+                },
+                'Product[pxc]': {
+                    number: "Sólo se permiten numeros"
+                    
+                }
+            },
+            highlight: function(e) {
+                $(e).closest('.form-group').addClass('has-error');
+            },
+            success: function(e) {
+                $(e).closest('.form-group').removeClass('has-error');//.addClass('has-info');
+                $(e).remove();
+            },
+            errorPlacement: function (error, element){
+              error.insertAfter(element.parent());  
+            },
+            submitHandler: function(form) {
+                form.submit();
+            }
+        });
+        
+        //validar rfc
+        jQuery.validator.addMethod("validRfc", function(value, element) {
+            return this.optional(element) || /^[a-zA-Z]{3,4}(\d{6})((\D|\d){3})/igm.test(value);
+        }, "El formato del RFC es incorrecto, considere ABCD123456EF1.");
+                       
+        /*****************fin validacion formulario***********************/
+        
+        /*****************js para input=file***********************/
         $('.id-input-file-2').ace_file_input({
             no_file: 'No File ...',
             btn_choose: 'Choose',
@@ -159,6 +265,8 @@
                     //onchange:''
                     //
         });
+        
+        /*****************termina js para input=file***************/
 
     });
 </script>

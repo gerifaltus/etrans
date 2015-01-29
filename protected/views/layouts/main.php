@@ -447,7 +447,7 @@ if ('ontouchstart' in document.documentElement)
                                 <b class="arrow"></b>
                             </li>
                             <li class="">
-                                <a href="<?php echo Yii::app()->createUrl('request/newProduct'); ?>">
+                                <a href="<?php echo Yii::app()->createUrl('Product/index'); ?>">
                                     <i class="menu-icon fa fa-caret-right"></i>
                                     Producto
                                 </a>
@@ -455,7 +455,7 @@ if ('ontouchstart' in document.documentElement)
                                 <b class="arrow"></b>
                             </li>
                             <li class="">
-                                <a href="<?php echo Yii::app()->createUrl('request/ProviderList'); ?>">
+                                <a href="<?php echo Yii::app()->createUrl('Clients/index'); ?>">
                                     <i class="menu-icon fa fa-caret-right"></i>
                                     Proveedor
                                 </a>

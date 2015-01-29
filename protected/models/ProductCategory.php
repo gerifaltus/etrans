@@ -39,7 +39,8 @@ class ProductCategory extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name_cat', 'length', 'max'=>25),
+                        array('name_cat', 'required'),
+			array('name_cat', 'length', 'max'=>45),
 			array('description', 'length', 'max'=>45),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
@@ -55,7 +56,7 @@ class ProductCategory extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'R_products' => array(self::HAS_MANY, 'Product', 'idcategory'),
+			'R_category' => array(self::HAS_MANY, 'Product', 'idcategory'),
 		);
 	}
 

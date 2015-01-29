@@ -70,7 +70,8 @@ class ProductController extends Controller {
         if (isset($_POST['Product'])) {
             $model->attributes = $_POST['Product'];
             if ($model->save())
-                $this->redirect(array('view', 'id' => $model->idproduct));
+                //$this->redirect(array('view', 'id' => $model->idproduct));
+            $this->redirect(Yii::app()->user->returnUrl = array('Product/index'));
         }
 
         $this->renderPartial('_form', array(

@@ -30,6 +30,30 @@
  */
 class Product extends CActiveRecord {
 
+    protected function beforeSave()
+    {
+        if(parent::beforeSave())
+        {
+            if($this->isNewRecord)
+            {
+                $this->created_at = date('Y-m-d H:i:s',time());
+                $this->created_by = Yii::app()->user->username;
+                
+            }else{
+                
+                $this->created_at = date('Y-m-d H:i:s',time());
+            }
+            
+            return true;
+            
+        }else{
+            
+            return false;
+        }
+        
+    }
+    
+    
     /**
      * Returns the static model of the specified AR class.
      * @param string $className active record class name.
@@ -53,15 +77,15 @@ class Product extends CActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('idclient, code, idcategory, pu', 'required'),
+            array('idclient, code, idcategory, pu, description', 'required'),
             array('idclient, idcategory, pxc, code', 'numerical', 'integerOnly' => true),
-            array('pu, heigth, depth, width, weight, stowmax, heigthpallet, weightpallet', 'match', 'pattern' => '^([0-9]+)(\.){1}([0-9]+)*$'), //valida numeros con decimales
+            array('pu, heigth, depth, width, weight, stowmax, heigthpallet, weightpallet', 'match', 'pattern' => '/^([0-9]+)(\.){1}([0-9]+)*$/'), //valida numeros con decimales
             array('code', 'length', 'max' => 15),
-            array('description', 'length', 'max' => 25),
-            /*array('image', 'length', 'max' => 20),*/
-            array('image', 'file', 'types'=>'jpg, gif, png, jpeg'),
+            array('description', 'length', 'max' => 45),
+            array('image', 'length', 'max' => 45),
+            array('image', 'file', 'types'=>'jpg, gif, png, jpeg', 'allowEmpty'=>true),
             //array('pu', 'length',),
-            //array('expiration', 'safe'),
+            /*array('image', 'safe'),*/
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
             array('idproduct, datetime, idclient, code, item, idcategory, description, presentation, image, pu, pxc, expiration, heigth, depth, width, weight, stowmax, heigthpallet, weightpallet', 'safe', 'on' => 'search'),
