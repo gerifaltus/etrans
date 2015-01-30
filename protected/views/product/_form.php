@@ -160,6 +160,11 @@
     </div>
     <div class="form-group"></div>
     <div class="modal-footer">
+        <?php
+        if($model->isNewRecord){
+            echo $form->hiddenField($model,'idproduct',array('value'=>'123'));
+        }
+        ?>
         <?php echo CHtml::submitButton($model->isNewRecord ? 'Crear' : 'Guardar', array('class' => 'btn btn-sm btn-primary')); ?>
     </div>
 
@@ -200,6 +205,9 @@
                 },
                 'Product[pxc]':{
                     number: true
+                },
+                'Product[image]': {
+                    accept: "image/jpeg, image/pjpeg, image/png, image/gif"
                 }
             },
             messages: {
@@ -228,6 +236,10 @@
                 'Product[pxc]': {
                     number: "Sólo se permiten numeros"
                     
+                },
+                'Product[image]': {
+                    accept: "Sólo se aceptan imágenes .jpg, .png, .gif, .jpeg"
+                    
                 }
             },
             highlight: function(e) {
@@ -244,19 +256,14 @@
                 form.submit();
             }
         });
-        
-        //validar rfc
-        jQuery.validator.addMethod("validRfc", function(value, element) {
-            return this.optional(element) || /^[a-zA-Z]{3,4}(\d{6})((\D|\d){3})/igm.test(value);
-        }, "El formato del RFC es incorrecto, considere ABCD123456EF1.");
-                       
+             
         /*****************fin validacion formulario***********************/
         
         /*****************js para input=file***********************/
         $('.id-input-file-2').ace_file_input({
-            no_file: 'No File ...',
+            no_file: 'Archivo...',
             btn_choose: 'Choose',
-            btn_change: 'Change',
+            btn_change: 'Seleccionar',
             droppable: false,
             onchange: null,
             thumbnail: false, //| true | large

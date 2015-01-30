@@ -1,6 +1,11 @@
 <?php
 
 class ProductController extends Controller {
+    
+    
+    //private $_imagePath = realpath( Yii::app()->basePath.'/images' );
+    //private $_imagePath = realpath(Yii::app()->getBasePath())."/images"; 
+    //private $_xx = Yii::app()->user->returnUrl;
 
     /**
      * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -27,7 +32,7 @@ class ProductController extends Controller {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
                 'actions' => array('index', 'view'),
-                'users' => array('*'),
+                'users' => array('@'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
                 'actions' => array('create', 'update'),
@@ -68,10 +73,32 @@ class ProductController extends Controller {
         // $this->performAjaxValidation($model);
 
         if (isset($_POST['Product'])) {
+                        
             $model->attributes = $_POST['Product'];
-            if ($model->save())
-                //$this->redirect(array('view', 'id' => $model->idproduct));
-            $this->redirect(Yii::app()->user->returnUrl = array('Product/index'));
+            
+            print_r($model->attributes);
+            
+            //$uploadedFile=CUploadedFile::getInstance($model,'image');
+            
+            
+            /*if ($model->save()){
+                
+                $nameImage = str_pad($model->primaryKey, 15, "0", STR_PAD_LEFT);
+                
+                $imagePath = realpath(Yii::app()->basePath)."/images"; 
+                
+                //get extension image upload
+                $imgExtension = $uploadedFile->extensionName;
+                
+                //$this->image = $nameImage .'.'.$imgExtension;
+                
+                if($uploadedFile->saveAs($imagePath .'/'. $nameImage .'.'. $imgExtension))
+                {
+                    $model->updateByPk($model->primaryKey, array('image'=>$nameImage .'.'.$imgExtension));
+                }
+                
+                $this->redirect(Yii::app()->user->returnUrl = array('Product/index'));
+            }*/
         }
 
         $this->renderPartial('_form', array(
@@ -89,17 +116,41 @@ class ProductController extends Controller {
     public function actionUpdate($id) {
         $model = $this->loadModel($id);
 
+        //extrae los clientes
+        $clientes = Clients::model()->findAll(array('select' => 'idclient, name_client'));
+        $categoria = ProductCategory::model()->findAll(array('select' => 'idcategory, name_cat'));
+        
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
 
         if (isset($_POST['Product'])) {
+            
             $model->attributes = $_POST['Product'];
-            if ($model->save())
+            
+            print_r($model->attributes);
+            
+            //$uploadedFile=CUploadedFile::getInstance($model,'image');
+            
+            /*if ($model->save())
+            {
+                
+                $imagePath = realpath(Yii::app()->basePath)."/images"; 
+                
+                $imgExtension = $uploadedFile->extensionName;
+                
+                if($uploadedFile->saveAs($imagePath .'/'. $nameImage .'.'. $imgExtension))
+                {
+                    $model->updateByPk($model->primaryKey, array('image'=>$nameImage .'.'.$imgExtension));
+                }
+                
                 $this->redirect(array('view', 'id' => $model->idproduct));
+            }*/
         }
 
-        $this->render('update', array(
+        $this->renderPartial('_form', array(
             'model' => $model,
+            'clientes' => $clientes,
+            'categoria' => $categoria
         ));
     }
 
@@ -167,6 +218,11 @@ class ProductController extends Controller {
             echo CActiveForm::validate($model);
             Yii::app()->end();
         }
+    }
+    
+    
+    public function uploadedFile(){
+        
     }
 
 }

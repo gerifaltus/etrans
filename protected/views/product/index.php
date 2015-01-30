@@ -159,28 +159,28 @@
             });
         }
         
-        function showUpdateClient()
+        function showUpdateProduct()
         {
             $.ajax({
-                url: "<?php echo Yii::app()->createUrl('clients/update'); ?>",
+                url: "<?php echo Yii::app()->createUrl('product/update'); ?>",
                 type: "GET",
                 data: {
-                    'idclient': $(this).data("upd-idclient")
+                    'idproduct': $(this).data("upd-idproduct")
                     },
                 success: function(data) {
-                    $('#divUpdateClients').html(data);
+                    $('#divUpdateProduct').html(data);
                 }
             });
         }
         
-        function delClientId(idclient, dial)
+        function delClientId(idproduct, dial)
         {
             //alert('ajax');
             $.ajax({
                 url: "<?php echo Yii::app()->createUrl('clients/delete'); ?>",
                 type: "GET",
                 data: {
-                    'idclient': idclient
+                    'idproduct': idproduct
                 },
                 beforeSend: function() {
                     $('#box_msg').show();
@@ -231,7 +231,7 @@
     });
     
     
-    $('#clients_table').DataTable({
+    $('#product_table').DataTable({
         responsive: true,
         "oLanguage": {
         "sInfo": "Mostrando _TOTAL_ registros (_START_ a _END_)",
