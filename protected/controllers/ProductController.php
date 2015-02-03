@@ -5,7 +5,7 @@ class ProductController extends Controller {
     
     //private $_imagePath = realpath( Yii::app()->basePath.'/images' );
     //private $_imagePath = realpath(Yii::app()->getBasePath())."/images"; 
-    //private $_xx = Yii::app()->user->returnUrl;
+    private $_uploadedFile = "";
 
     /**
      * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -19,7 +19,7 @@ class ProductController extends Controller {
     public function filters() {
         return array(
             'accessControl', // perform access control for CRUD operations
-            'postOnly + delete', // we only allow deletion via POST request
+            //'postOnly + delete', // we only allow deletion via POST request
         );
     }
 
@@ -31,16 +31,8 @@ class ProductController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('index', 'view'),
+                'actions' => array('index', 'view', 'create', 'update', 'delete'),
                 'users' => array('@'),
-            ),
-            array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'actions' => array('create', 'update'),
-                'users' => array('@'),
-            ),
-            array('allow', // allow admin user to perform 'admin' and 'delete' actions
-                'actions' => array('admin', 'delete'),
-                'users' => array('admin'),
             ),
             array('deny', // deny all users
                 'users' => array('*'),
@@ -65,6 +57,8 @@ class ProductController extends Controller {
     public function actionCreate() {
         $model = new Product;
         
+        $bd_img = $model->image;
+        
         //extrae los clientes
         $clientes = Clients::model()->findAll(array('select' => 'idclient, name_client'));
         $categoria = ProductCategory::model()->findAll(array('select' => 'idcategory, name_cat'));
@@ -76,29 +70,26 @@ class ProductController extends Controller {
                         
             $model->attributes = $_POST['Product'];
             
-            print_r($model->attributes);
+            $this->_uploadedFile = CUploadedFile::getInstance($model,'image');
             
-            //$uploadedFile=CUploadedFile::getInstance($model,'image');
-            
-            
-            /*if ($model->save()){
+            if ($model->save()){
                 
-                $nameImage = str_pad($model->primaryKey, 15, "0", STR_PAD_LEFT);
+                if($this->_uploadedFile !== null){
                 
-                $imagePath = realpath(Yii::app()->basePath)."/images"; 
-                
-                //get extension image upload
-                $imgExtension = $uploadedFile->extensionName;
-                
-                //$this->image = $nameImage .'.'.$imgExtension;
-                
-                if($uploadedFile->saveAs($imagePath .'/'. $nameImage .'.'. $imgExtension))
-                {
-                    $model->updateByPk($model->primaryKey, array('image'=>$nameImage .'.'.$imgExtension));
+                    $imagePath = realpath(Yii::app()->basePath) . "/images";
+
+                    $imgExt = $this->_uploadedFile->extensionName;
+
+                    $img = str_pad($model->primaryKey, 15, "0", STR_PAD_LEFT).".".$imgExt;
+
+                    if ($this->_uploadedFile->saveAs($imagePath . '/' . $img)) {
+
+                        $model->updateByPk($model->primaryKey, array('image' => $img));
+                    }
                 }
-                
+
                 $this->redirect(Yii::app()->user->returnUrl = array('Product/index'));
-            }*/
+            }
         }
 
         $this->renderPartial('_form', array(
@@ -113,8 +104,11 @@ class ProductController extends Controller {
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id the ID of the model to be updated
      */
-    public function actionUpdate($id) {
-        $model = $this->loadModel($id);
+    public function actionUpdate($idproduct) {
+        
+        $model = $this->loadModel($idproduct);
+        
+        $bd_img = $model->image;
 
         //extrae los clientes
         $clientes = Clients::model()->findAll(array('select' => 'idclient, name_client'));
@@ -127,24 +121,29 @@ class ProductController extends Controller {
             
             $model->attributes = $_POST['Product'];
             
-            print_r($model->attributes);
+            $this->_uploadedFile = CUploadedFile::getInstance($model,'image');
             
-            //$uploadedFile=CUploadedFile::getInstance($model,'image');
+            $img = $this->setNameImage($model, $bd_img);
             
-            /*if ($model->save())
+            if ($model->save())
             {
+                $imagePath = realpath(Yii::app()->basePath) . "/images";
+
+                if($this->_uploadedFile !== null){
                 
-                $imagePath = realpath(Yii::app()->basePath)."/images"; 
-                
-                $imgExtension = $uploadedFile->extensionName;
-                
-                if($uploadedFile->saveAs($imagePath .'/'. $nameImage .'.'. $imgExtension))
-                {
-                    $model->updateByPk($model->primaryKey, array('image'=>$nameImage .'.'.$imgExtension));
+                    if ($this->_uploadedFile->saveAs($imagePath . '/' . $img)) {
+                        
+                        //eliminar img anterior
+                        if(($bd_img !== $model->image) && file_exists($imagePath . '/' . $bd_img)){
+                            unlink($imagePath . '/' . $bd_img);
+                            //$this->redirect(Yii::app()->user->returnUrl = array('Product/index'));
+                        }
+                        
+                    }
                 }
-                
-                $this->redirect(array('view', 'id' => $model->idproduct));
-            }*/
+
+                $this->redirect(Yii::app()->user->returnUrl = array('Product/index'));
+            }
         }
 
         $this->renderPartial('_form', array(
@@ -159,12 +158,14 @@ class ProductController extends Controller {
      * If deletion is successful, the browser will be redirected to the 'admin' page.
      * @param integer $id the ID of the model to be deleted
      */
-    public function actionDelete($id) {
-        $this->loadModel($id)->delete();
+    public function actionDelete($idproduct) {
+        $this->loadModel($idproduct)->delete();
 
         // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-        if (!isset($_GET['ajax']))
-            $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+        if (!isset($_GET['ajax'])){
+            //$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+            $this->redirect(Yii::app()->user->returnUrl = array('product/index'));
+        }
     }
 
     /**
@@ -220,9 +221,33 @@ class ProductController extends Controller {
         }
     }
     
-    
-    public function uploadedFile(){
+    public function setNameImage($model, $bd_img){
         
+        if($this->_uploadedFile === null){  //no hay imagen en post
+            
+            $model->image = $bd_img;
+            
+        }else{
+
+            //get extension image upload
+            $imgExtension = $this->_uploadedFile->extensionName;
+            
+            if($model->isNewRecord){
+                
+                $nameImage = str_pad($model->primaryKey, 15, "0", STR_PAD_LEFT);
+                
+            }else{
+                
+                $nameImage = $model->idproduct;
+                
+            }
+            
+            $nameImage = $nameImage .'.'.$imgExtension;
+            
+            $model->image = $nameImage;
+            
+            return $nameImage;
+        }
     }
 
 }

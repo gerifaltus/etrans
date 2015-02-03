@@ -84,6 +84,7 @@ class Product extends CActiveRecord {
             array('description', 'length', 'max' => 45),
             array('image', 'length', 'max' => 45),
             array('image', 'file', 'types'=>'jpg, gif, png, jpeg', 'allowEmpty'=>true),
+            array('code', 'unique', 'message'=>'El {attribute} ingresado ya existe en el sistema'),
             //array('pu', 'length',),
             /*array('image', 'safe'),*/
             // The following rule is used by search().

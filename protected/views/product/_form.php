@@ -161,8 +161,11 @@
     <div class="form-group"></div>
     <div class="modal-footer">
         <?php
-        if($model->isNewRecord){
-            echo $form->hiddenField($model,'idproduct',array('value'=>'123'));
+        $id = $model->idproduct;
+        $img = $model->image;
+        
+        if(!$model->isNewRecord){
+            echo $form->hiddenField($model,'idproduct',array('value'=>"$id"));
         }
         ?>
         <?php echo CHtml::submitButton($model->isNewRecord ? 'Crear' : 'Guardar', array('class' => 'btn btn-sm btn-primary')); ?>
@@ -262,7 +265,7 @@
         /*****************js para input=file***********************/
         $('.id-input-file-2').ace_file_input({
             no_file: 'Archivo...',
-            btn_choose: 'Choose',
+            btn_choose: 'Seleccionar',
             btn_change: 'Seleccionar',
             droppable: false,
             onchange: null,
