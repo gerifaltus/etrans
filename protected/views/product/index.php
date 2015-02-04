@@ -117,6 +117,38 @@
     </div>
 </div><!-- PAGE CONTENT ENDS -->
 
+<div id="updateProduct-form" class="modal" tabindex="-1">
+    <div class="modal-dialog" style="width:900px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="blue bigger">Edici&oacute;n de Producto</h4>
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12" id="divUpdateProduct">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><!-- PAGE CONTENT ENDS -->
+
+<div id="delProduct-confirm" class="hide">
+    <div class="alert alert-info bigger-110">
+        ¿Est&aacute; seguro de eliminar el Producto Seleccionado?
+    </div>
+<!--
+    <div class="space-6"></div>
+
+    <p cl   ass="bigger-110 bolder center grey">
+        <i class="ace-icon fa fa-hand-o-right blue bigger-120"></i>
+        Are you sure?
+    </p>-->
+</div><!-- #dialog-confirm -->
+
 
 <script type="text/javascript">
 
@@ -127,7 +159,7 @@
         
         $('#btCategoryNew').on("click", showCreateProductCategory); 
         
-        //$('#clients_table tbody tr').on("click", "a.editClient", showUpdateClient);
+        $('#product_table tbody tr').on("click", "a.editProduct", showUpdateProduct);
         
         
         //muestra ventana modal para registrar complex
@@ -173,11 +205,11 @@
             });
         }
         
-        function delClientId(idproduct, dial)
+        function delProductId(idproduct, dial)
         {
             //alert('ajax');
             $.ajax({
-                url: "<?php echo Yii::app()->createUrl('clients/delete'); ?>",
+                url: "<?php echo Yii::app()->createUrl('product/delete'); ?>",
                 type: "GET",
                 data: {
                     'idproduct': idproduct
@@ -190,7 +222,7 @@
                 },
                 success: function(data) {
                     $(dial).dialog('close');
-                    window.location.href='index.php?r=clients/index';
+                    window.location.href='index.php?r=product/index';
                 },
                 error: function(data) {
                     $('#img_procesing').hide();
@@ -201,12 +233,12 @@
         }
         
 
-    $( "#clients_table tbody tr" ).on('click', 'a.delClient', function(e) {
-        var idclient = $(this).data('del-idclient');
+    $( "#product_table tbody tr" ).on('click', 'a.delProduct', function(e) {
+        var idproduct = $(this).data('del-idproduct');
         
         e.preventDefault();
 				
-	$( "#delClients-confirm" ).removeClass('hide').dialog({
+	$( "#delProduct-confirm" ).removeClass('hide').dialog({
             resizable: false,
             modal: true,
             /*title: "<div class='widget-header'><h4 class='smaller'><i class='ace-icon fa fa-exclamation-triangle red'></i> Empty the recycle bin?</h4></div>",
@@ -216,7 +248,7 @@
                             html: "<i class='ace-icon fa fa-trash-o bigger-110'></i>&nbsp; Elimiar",
                             class : "btn btn-danger btn-xs",
                             click: function() {                                            
-                                delClientId(idclient, $(this));
+                                delProductId(idproduct, $(this));
                             }
                         },
                         {
