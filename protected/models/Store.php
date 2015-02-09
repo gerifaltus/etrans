@@ -52,16 +52,18 @@ class Store extends CActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('email, name_store, email, idtypestore, idcomplex, idcountry, idstate, idcity, name_store', 'required'),
+            array('email, name_store, idtypestore, idcomplex, idcountry, idstate, idcity', 'required'),
             array('tel, hrsbday, inihrsbday, finhrsbday, idtypestore, idcomplex, cp, idcountry, idstate, idcity', 'numerical', 'integerOnly' => true),
             array('name_store, address, colony', 'length', 'max' => 45),
-            array('dimensions', 'length', 'max' => 15),
-            array('tel', 'length', 'max' => 20),
-            array('tel', 'numerical', 'integerOnly'=>true,'message'=>'El {attribute} debe ser númerico'),
+            array('long, width', 'match', 'pattern' => '/^([0-9]+)(\.){1}([0-9]+)*$/', 'message'=>'El {attribute} solo recibe numeros enteros o con decimales'), //valida numeros con decimales
+            array('tel', 'length', 'max' => 13),
+            array('long, width', 'length', 'max' => 10),
+            array('cp', 'length', 'max' => 5),
             array('email', 'email', 'message'=>'El {attribute} ingresa es incorrecto'),
+            array('email', 'unique', 'message'=>'El {attribute} ingresado ya existe en el sistema'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
-            array('idstore, namestore, hrsbday, inihrsbday, finhrsbday, status, idtypestore, idcomplex, address, colony, cp, idcountry, idstate, idcity, dimensions, tel, email', 'safe', 'on' => 'search'),
+            array('idstore, namestore, hrsbday, inihrsbday, finhrsbday, status, idtypestore, idcomplex, address, colony, cp, idcountry, idstate, idcity, tel, email, long, width', 'safe', 'on' => 'search'),
         );
     }
 
@@ -72,9 +74,9 @@ class Store extends CActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'R_typestore' => array(self::BELONGS_TO, 'StoreTypestore', 'idtypestore'),
-            'R_complex' => array(self::BELONGS_TO, 'StoreComplex', 'idcomplex'),
-            'R_plataform' => array(self::HAS_MANY, 'StorePlataform', 'idstore'),
+            'R_typestore' => array(self::BELONGS_TO, 'TypeStore', 'idtypestore'),
+            'R_complex' => array(self::BELONGS_TO, 'Complex', 'idcomplex'),
+            'R_plataform' => array(self::HAS_MANY, 'Plataform', 'idstore'),
             'R_country' => array(self::BELONGS_TO, 'Country', 'idcountry'),
             'R_state' => array(self::BELONGS_TO, 'State', 'idstate'),
             'R_city' => array(self::BELONGS_TO, 'City', 'idcity'),
@@ -94,15 +96,16 @@ class Store extends CActiveRecord {
             'is_inactive' => 'Status',
             'idtypestore' => 'Idtypestore',
             'idcomplex' => 'Idcomplex',
-            'address' => 'Domicilio',
+            'address' => 'Calle y número',
             'colony' => 'Colonia',
             'cp' => 'C.P.',
             'idcountry' => 'Idcountry',
             'idstate' => 'Idstate',
             'idcity' => 'Idcity',
-            'dimensions' => 'Dimensions',
             'tel' => 'Tel',
             'email' => 'Email',
+            'width' => 'Ancho',
+            'long' => 'Alto',
         );
     }
 
@@ -117,7 +120,7 @@ class Store extends CActiveRecord {
         $criteria = new CDbCriteria;
 
         $criteria->compare('idstore', $this->idstore);
-        $criteria->compare('namestore', $this->namestore, true);
+        $criteria->compare('name_store', $this->namestore, true);
         $criteria->compare('hrsbday', $this->hrsbday);
         $criteria->compare('inihrsbday', $this->inihrsbday);
         $criteria->compare('finhrsbday', $this->finhrsbday);
@@ -130,9 +133,10 @@ class Store extends CActiveRecord {
         $criteria->compare('idcountry', $this->idcountry);
         $criteria->compare('idstate', $this->idstate);
         $criteria->compare('idcity', $this->idcity);
-        $criteria->compare('dimensions', $this->dimensions, true);
         $criteria->compare('tel', $this->tel, true);
         $criteria->compare('email', $this->email, true);
+        $criteria->compare('width', $this->width, true);
+        $criteria->compare('long', $this->long, true);
 
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,
@@ -141,17 +145,17 @@ class Store extends CActiveRecord {
 
     public function getAllStore() {
         $criteria = new CDbCriteria;
-        $criteria->select = 't.idstore,t.name_store, t.address, t.colony, t.cp, t.dimensions';
+        $criteria->select = 't.idstore, t.name_store, t.address, t.colony, t.cp, t.width, t.long';
         $criteria->with = array(
-                                'R_complejo'=>array('together'=>true, 'select'=>array("CONCAT_WS(' - ',name_short, name) AS name_complex")),
-                                'R_typestore'=>array('together'=>true, 'select'=>array('name')),
+                                'R_complex'=>array('together'=>true, 'select'=>array("CONCAT_WS(' - ',name_short, name_complex) AS name_complex")),
+                                'R_typestore'=>array('together'=>true, 'select'=>array('name_typestore')),
                                 'R_country'=>array('together'=>true, 'select'=>array('name_country')),
                                 'R_state'=>array('together'=>true, 'select'=>array('name_state')),
                                 'R_city'=>array('together'=>true, 'select'=>array('name_city')),
                                 );
         $criteria->condition = 't.is_inactive=:inactive';
         $criteria->params = array(':inactive' => 0);
-        return Store::model()->findAll($criteria);
+        return Self::model()->findAll($criteria);
     }
 
 }

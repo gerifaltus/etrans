@@ -39,7 +39,7 @@ class TypeStore extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, description', 'length', 'max'=>45),
+			array('name_typestore, description', 'length', 'max'=>45),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('idtypestore, name, description', 'safe', 'on'=>'search'),
@@ -65,7 +65,7 @@ class TypeStore extends CActiveRecord
 	{
 		return array(
 			'idtypestore' => 'Idtypestore',
-			'name' => 'Name',
+			'name_typestore' => 'Tipo Almacén',
 			'description' => 'Description',
 		);
 	}
@@ -82,7 +82,7 @@ class TypeStore extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('idtypestore',$this->idtypestore);
-		$criteria->compare('name',$this->name,true);
+		$criteria->compare('name_typestore',$this->name,true);
 		$criteria->compare('description',$this->description,true);
 
 		return new CActiveDataProvider($this, array(

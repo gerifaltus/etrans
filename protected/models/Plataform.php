@@ -1,23 +1,23 @@
 <?php
 
 /**
- * This is the model class for table "{{state}}".
+ * This is the model class for table "{{store_plataform}}".
  *
- * The followings are the available columns in table '{{state}}':
- * @property integer $idstate
- * @property integer $idcountry
- * @property string $name_state
+ * The followings are the available columns in table '{{store_plataform}}':
+ * @property integer $idplataform
+ * @property integer $idstore
+ * @property string $name_plataform
+ * @property string $is_inactive
  *
  * The followings are the available model relations:
- * @property City[] $cities
- * @property Country $idcountry0
+ * @property Store $idstore0
  */
-class State extends CActiveRecord
+class Plataform extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
-	 * @return State the static model class
+	 * @return Plataform the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -29,7 +29,7 @@ class State extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return '{{state}}';
+		return '{{store_plataform}}';
 	}
 
 	/**
@@ -40,12 +40,13 @@ class State extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('idcountry', 'required'),
-			array('idcountry', 'numerical', 'integerOnly'=>true),
-			array('name_state', 'length', 'max'=>45),
+			array('idstore', 'required'),
+			array('idstore', 'numerical', 'integerOnly'=>true),
+			array('name_plataform', 'length', 'max'=>45),
+			array('is_inactive', 'length', 'max'=>1),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('idstate, idcountry, name_state', 'safe', 'on'=>'search'),
+			array('idplataform, idstore, name_plataform, is_inactive', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -57,8 +58,7 @@ class State extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'cities' => array(self::HAS_MANY, 'City', 'idstate'),
-			'idcountry0' => array(self::BELONGS_TO, 'Country', 'idcountry'),
+			'idstore0' => array(self::BELONGS_TO, 'Store', 'idstore'),
 		);
 	}
 
@@ -68,9 +68,10 @@ class State extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'idstate' => 'Idstate',
-			'idcountry' => 'Idcountry',
-			'name_state' => 'Name State',
+			'idplataform' => 'Idplataform',
+			'idstore' => 'Idstore',
+			'name_plataform' => 'Name Plataform',
+			'is_inactive' => 'Is Inactive',
 		);
 	}
 
@@ -85,13 +86,13 @@ class State extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('idstate',$this->idstate);
-		$criteria->compare('idcountry',$this->idcountry);
-		$criteria->compare('name_state',$this->name_state,true);
+		$criteria->compare('idplataform',$this->idplataform);
+		$criteria->compare('idstore',$this->idstore);
+		$criteria->compare('name_plataform',$this->name_plataform,true);
+		$criteria->compare('is_inactive',$this->is_inactive,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
 	}
-        
 }
