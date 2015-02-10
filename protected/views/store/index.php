@@ -66,6 +66,12 @@ $this->widget('zii.widgets.CListView', array(
                                     <a class="blue delStore" href="#" data-del-idstore="<?php echo $row->idstore ?>">
                                         <i class="ace-icon fa fa-trash-o bigger-130"></i>
                                     </a>
+                                    <!--<a class="blue showLayout" href="<?php //echo Yii::app()->createUrl('StorageLayout/index') ?>" data-show-Layout="<?php //echo $row->idstore ?>">
+                                        <i class="ace-icon fa fa-desktop bigger-130"></i>
+                                    </a>-->
+                                    
+                                    <?php echo CHtml::link('<i class="ace-icon fa fa-desktop bigger-130"></i>',array('StorageLayout/index',
+                                         'idstore'=>$row->idstore), array('class'=>'blue')); ?>
                                 </div>
                             </td>
                         </tr>

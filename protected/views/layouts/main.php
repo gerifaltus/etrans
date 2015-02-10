@@ -431,7 +431,7 @@ if ('ontouchstart' in document.documentElement)
 
                         <ul class="submenu">
                             <li class="">
-                                <a href="<?php echo Yii::app()->createUrl('complex/index'); ?>">
+                                <a href="<?php echo Yii::app()->createUrl('Complex/index'); ?>">
                                     <i class="menu-icon fa fa-caret-right"></i>
                                     Complejo
                                 </a>
@@ -439,7 +439,7 @@ if ('ontouchstart' in document.documentElement)
                                 <b class="arrow"></b>
                             </li>
                             <li class="">
-                                <a href="<?php echo Yii::app()->createUrl('request/newAlmacen'); ?>">
+                                <a href="<?php echo Yii::app()->createUrl('Store/index'); ?>">
                                     <i class="menu-icon fa fa-caret-right"></i>
                                     Almac&eacute;n
                                 </a>
