@@ -45,596 +45,100 @@
                         </ul>
 
                         <div class="tab-content">
-                            <div id="zona" class="tab-pane in active">
+                            <?php 
+                            $current = 1;
+                            foreach($modelStorageUnit as $key => $val){
+
+                                if($valunits['zona'] === $key) {                          
+                            ?>
+                            <div id="zona" class="tab-pane active">
                                 <!--inicia panel del acordeon -->
                                 <div id="accordionZona" class="accordion-style2">
-
+                                    <?php 
+                                    
+                                        foreach($val as $row){
+                                            
+                                        ?>
                                     <div class="group">
-                                        <h3 class="accordion-header">Recepci&oacute;n</h3>
-                                        <form class="form-horizontal contentAccordion" role="form">
+                                        <h3 class="accordion-header"><?php echo $row['name_units'] ?></h3>
+                                        <form class="form-horizontal contentAccordion" role="form" id="<?php echo "form-".$row['idstorage_units'] ?>">
                                             <div class="contentAccordion">
                                                 <div class="form-group">
                                                     <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1"> Largo </label>
                                                     <div class="col-sm-7">
-                                                        <input id="form-field-1-1" class="col-xs-10 col-sm-7" type="text">
+                                                        <input id="<?php echo $row['name_raw']."_"."long_".$row['idstorage_units'] ?>" class="col-xs-10 col-sm-7" type="text">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1"> Ancho </label>
                                                     <div class="col-sm-7">
-                                                        <input id="form-field-1-1" class="col-xs-10 col-sm-7" type="text">
+                                                        <input id="<?php echo $row['name_raw']."_"."width-".$row['idstorage_units'] ?>" class="col-xs-10 col-sm-7" type="text">
                                                     </div>
                                                 </div>
+                                                <?php if($row['idstorage_units'] == 1){ ?>
                                                 <div class="form-group">
                                                     <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1"> Andenes </label>
                                                     <div class="col-sm-7">
-                                                        <input id="form-field-1-1" class="col-xs-10 col-sm-7" type="text">
+                                                        <input id="<?php echo $row['name_raw']."_"."platform-".$row['idstorage_units'] ?>" class="col-xs-10 col-sm-7" type="text">
                                                     </div>
                                                 </div>
-                                                <button class="btn btn-sm btn-info2" type="button" id="ztRecepcion" data-idtree="zRecepcion">
+                                                <?php } ?>
+                                                <button class="btn btn-xs btn-info2" type="button" id="<?php echo "z_".$row['name_raw']?>" data-idtree="<?php echo "z_".$row['name_raw']?>">
                                                     <i class="ace-icon fa fa-check"></i>
                                                     Aplicar
                                                 </button>
                                             </div>
                                         </form>
                                     </div>
-                                    
-                                    <div class="group">
-                                        <h3 class="accordion-header">Control de Calidad</h3>
-                                        <form class="form-horizontal contentAccordion" role="form">
-                                            <div class="contentAccordion">
-                                                <div class="form-group">
-                                                    <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1"> Largo </label>
-                                                    <div class="col-sm-7">
-                                                        <input id="form-field-1-1" class="col-xs-10 col-sm-7" type="text">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1"> Ancho </label>
-                                                    <div class="col-sm-7">
-                                                        <input id="form-field-1-1" class="col-xs-10 col-sm-7" type="text">
-                                                    </div>
-                                                </div>
-                                                <button class="btn btn-sm btn-info2" type="button">
-                                                    <i class="ace-icon fa fa-check"></i>
-                                                    Aplicar
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </div>
-
-                                    <div class="group">
-                                        <h3 class="accordion-header">Cuarentena</h3>
-                                        <form class="form-horizontal contentAccordion" role="form">
-                                            <div class="contentAccordion">
-                                                <div class="form-group">
-                                                    <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1"> Largo </label>
-                                                    <div class="col-sm-7">
-                                                        <input id="form-field-1-1" class="col-xs-10 col-sm-7" type="text">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1"> Ancho </label>
-                                                    <div class="col-sm-7">
-                                                        <input id="form-field-1-1" class="col-xs-10 col-sm-7" type="text">
-                                                    </div>
-                                                </div>
-                                                <button class="btn btn-sm btn-info2" type="button">
-                                                    <i class="ace-icon fa fa-check"></i>
-                                                    Aplicar
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </div>
-
-                                    <div class="group">
-                                        <h3 class="accordion-header">Maquila</h3>
-                                        <form class="form-horizontal contentAccordion" role="form">
-                                            <div class="contentAccordion">
-                                                <div class="form-group">
-                                                    <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1"> Largo </label>
-                                                    <div class="col-sm-7">
-                                                        <input id="form-field-1-1" class="col-xs-10 col-sm-7" type="text">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1"> Ancho </label>
-                                                    <div class="col-sm-7">
-                                                        <input id="form-field-1-1" class="col-xs-10 col-sm-7" type="text">
-                                                    </div>
-                                                </div>
-                                                <button class="btn btn-sm btn-info2" type="button">
-                                                    <i class="ace-icon fa fa-check"></i>
-                                                    Aplicar
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </div>
-
-                                    <div class="group">
-                                        <h3 class="accordion-header">Almacenamiento</h3>
-                                        <form class="form-horizontal contentAccordion" role="form">
-                                            <div class="contentAccordion">
-                                                <div class="form-group">
-                                                    <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1"> Largo </label>
-                                                    <div class="col-sm-7">
-                                                        <input id="form-field-1-1" class="col-xs-10 col-sm-7" type="text">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1"> Ancho </label>
-                                                    <div class="col-sm-7">
-                                                        <input id="form-field-1-1" class="col-xs-10 col-sm-7" type="text">
-                                                    </div>
-                                                </div>
-                                                <button class="btn btn-sm btn-info2" type="button">
-                                                    <i class="ace-icon fa fa-check"></i>
-                                                    Aplicar
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    
-                                    <div class="group">
-                                        <h3 class="accordion-header">Crossdock</h3>
-                                        <form class="form-horizontal contentAccordion" role="form">
-                                            <div class="contentAccordion">
-                                                <div class="form-group">
-                                                    <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1"> Largo </label>
-                                                    <div class="col-sm-7">
-                                                        <input id="form-field-1-1" class="col-xs-10 col-sm-7" type="text">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1"> Ancho </label>
-                                                    <div class="col-sm-7">
-                                                        <input id="form-field-1-1" class="col-xs-10 col-sm-7" type="text">
-                                                    </div>
-                                                </div>
-                                                <button class="btn btn-sm btn-info2" type="button">
-                                                    <i class="ace-icon fa fa-check"></i>
-                                                    Aplicar
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    
-                                    <div class="group">
-                                        <h3 class="accordion-header">Alto Valor</h3>
-                                        <form class="form-horizontal contentAccordion" role="form">
-                                            <div class="contentAccordion">
-                                                <div class="form-group">
-                                                    <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1"> Largo </label>
-                                                    <div class="col-sm-7">
-                                                        <input id="form-field-1-1" class="col-xs-10 col-sm-7" type="text">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1"> Ancho </label>
-                                                    <div class="col-sm-7">
-                                                        <input id="form-field-1-1" class="col-xs-10 col-sm-7" type="text">
-                                                    </div>
-                                                </div>
-                                                <button class="btn btn-sm btn-info2" type="button">
-                                                    <i class="ace-icon fa fa-check"></i>
-                                                    Aplicar
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    
-                                    <div class="group">
-                                        <h3 class="accordion-header">Picking</h3>
-                                        <form class="form-horizontal contentAccordion" role="form">
-                                            <div class="contentAccordion">
-                                                <div class="form-group">
-                                                    <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1"> Largo </label>
-                                                    <div class="col-sm-7">
-                                                        <input id="form-field-1-1" class="col-xs-10 col-sm-7" type="text">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1"> Ancho </label>
-                                                    <div class="col-sm-7">
-                                                        <input id="form-field-1-1" class="col-xs-10 col-sm-7" type="text">
-                                                    </div>
-                                                </div>
-                                                <button class="btn btn-sm btn-info2" type="button">
-                                                    <i class="ace-icon fa fa-check"></i>
-                                                    Aplicar
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    
-                                    <div class="group">
-                                        <h3 class="accordion-header">Devoluci&oacute;n</h3>
-                                        <form class="form-horizontal contentAccordion" role="form">
-                                            <div class="contentAccordion">
-                                                <div class="form-group">
-                                                    <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1"> Largo </label>
-                                                    <div class="col-sm-7">
-                                                        <input id="form-field-1-1" class="col-xs-10 col-sm-7" type="text">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1"> Ancho </label>
-                                                    <div class="col-sm-7">
-                                                        <input id="form-field-1-1" class="col-xs-10 col-sm-7" type="text">
-                                                    </div>
-                                                </div>
-                                                <button class="btn btn-sm btn-info2" type="button">
-                                                    <i class="ace-icon fa fa-check"></i>
-                                                    Aplicar
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    
-                                    <div class="group">
-                                        <h3 class="accordion-header">Desahogo</h3>
-                                        <form class="form-horizontal contentAccordion" role="form">
-                                            <div class="contentAccordion">
-                                                <div class="form-group">
-                                                    <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1"> Largo </label>
-                                                    <div class="col-sm-7">
-                                                        <input id="form-field-1-1" class="col-xs-10 col-sm-7" type="text">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1"> Ancho </label>
-                                                    <div class="col-sm-7">
-                                                        <input id="form-field-1-1" class="col-xs-10 col-sm-7" type="text">
-                                                    </div>
-                                                </div>
-                                                <button class="btn btn-sm btn-info2" type="button">
-                                                    <i class="ace-icon fa fa-check"></i>
-                                                    Aplicar
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </div>
-
-                                    <div class="group">
-                                        <h3 class="accordion-header">Merma</h3>
-                                        <form class="form-horizontal contentAccordion" role="form">
-                                            <div class="contentAccordion">
-                                                <div class="form-group">
-                                                    <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1"> Largo </label>
-                                                    <div class="col-sm-7">
-                                                        <input id="form-field-1-1" class="col-xs-10 col-sm-7" type="text">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1"> Ancho </label>
-                                                    <div class="col-sm-7">
-                                                        <input id="form-field-1-1" class="col-xs-10 col-sm-7" type="text">
-                                                    </div>
-                                                </div>
-                                                <button class="btn btn-sm btn-info2" type="button">
-                                                    <i class="ace-icon fa fa-check"></i>
-                                                    Aplicar
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    
-                                    <div class="group">
-                                        <h3 class="accordion-header">Embarque</h3>
-                                        <form class="form-horizontal contentAccordion" role="form">
-                                            <div class="contentAccordion">
-                                                <div class="form-group">
-                                                    <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1"> Largo </label>
-                                                    <div class="col-sm-7">
-                                                        <input id="form-field-1-1" class="col-xs-10 col-sm-7" type="text">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1"> Ancho </label>
-                                                    <div class="col-sm-7">
-                                                        <input id="form-field-1-1" class="col-xs-10 col-sm-7" type="text">
-                                                    </div>
-                                                </div>
-                                                <button class="btn btn-sm btn-info2" type="button">
-                                                    <i class="ace-icon fa fa-check"></i>
-                                                    Aplicar
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    
+                                    <?php } ?>                                    
                                 </div><!-- #accordion -->
                                 <!-- final del acordeon -->
                             </div>
-
+                            <?php } 
+                            if($valunits['area'] === $key) {                          
+                            ?>
                             <div id="area" class="tab-pane">
                                 <!--inicia panel del acordeon -->
                                 <div id="accordionArea" class="accordion-style2">
-
+                                    <?php 
+                                    
+                                        foreach($val as $row){
+                                            
+                                    ?>
                                     <div class="group">
-                                        <h3 class="accordion-header">Alta Rotaci&oacute;n</h3>
+                                        <h3 class="accordion-header"><?php echo $row['name_units'] ?></h3>
 
-                                        <form class="form-horizontal contentAccordion" role="form">
+                                        <form class="form-horizontal contentAccordion" role="form" id="<?php echo "form-".$row['idstorage_units'] ?>">
                                             <div class="contentAccordion">
                                                 <div class="form-group">
                                                     <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1"> Largo </label>
                                                     <div class="col-sm-7">
-                                                        <input id="form-field-1-1" class="col-xs-10 col-sm-7" type="text">
+                                                        <input id="<?php echo $row['name_raw']."_"."long_".$row['idstorage_units'] ?>" class="col-xs-10 col-sm-7" type="text">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1"> Ancho </label>
                                                     <div class="col-sm-7">
-                                                        <input id="form-field-1-1" class="col-xs-10 col-sm-7" type="text">
+                                                        <input id="<?php echo $row['name_raw']."_"."width_".$row['idstorage_units'] ?>" class="col-xs-10 col-sm-7" type="text">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="col-sm-12 control-label" for="form-field-select-1">Pertenece a</label>
                                                     <div class="col-sm-12">
-                                                        <select class="col-sm-12" id="form-field-select-1">
-                                                            <option value="">Almacenamiento</option>
-                                                            <option value="">Cuarentena</option>
-                                                            <option value="">Picking</option>
-                                                            <option value="">Crossdock</option>
-                                                            <option value="">Maquila</option>
-                                                            <option value="">Merma</option>
-                                                            <option value="">Devoluci&oacute;n</option>
-                                                            <option value="">Desahogo</option>
-                                                            <option value="">Control de Calidad</option>
-                                                        </select>
+                                                        <?php echo CHtml::dropDownList('idstorage_units', '' ,$dropDownZona, array('prompt' => 'Seleccione Zona', 'class'=>'col-sm-12')); ?>
                                                     </div>
                                                 </div>
-                                                <button class="btn btn-sm btn-info2" type="button">
+                                                <button class="btn btn-xs btn-info2" type="button" id="<?php echo "z_".$row['name_raw']?>" data-idtree="<?php echo "z_".$row['name_raw']?>"> 
                                                     <i class="ace-icon fa fa-check"></i>
                                                     Aplicar
                                                 </button>
                                             </div>
                                         </form>
                                     </div>
-
-                                    <div class="group">
-                                        <h3 class="accordion-header">Media Rotaci&oacute;n</h3>
-
-                                        <form class="form-horizontal contentAccordion" role="form">
-                                            <div class="contentAccordion">
-                                                <div class="form-group">
-                                                    <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1"> Largo </label>
-                                                    <div class="col-sm-7">
-                                                        <input id="form-field-1-1" class="col-xs-10 col-sm-7" type="text">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1"> Ancho </label>
-                                                    <div class="col-sm-7">
-                                                        <input id="form-field-1-1" class="col-xs-10 col-sm-7" type="text">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-12 control-label" for="form-field-select-1">Pertenece a</label>
-                                                    <div class="col-sm-12">
-                                                        <select class="col-sm-12" id="form-field-select-1">
-                                                            <option value="">Almacenamiento</option>
-                                                            <option value="">Cuarentena</option>
-                                                            <option value="">Picking</option>
-                                                            <option value="">Crossdock</option>
-                                                            <option value="">Maquila</option>
-                                                            <option value="">Merma</option>
-                                                            <option value="">Devoluci&oacute;n</option>
-                                                            <option value="">Desahogo</option>
-                                                            <option value="">Control de Calidad</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <button class="btn btn-sm btn-info2" type="button">
-                                                    <i class="ace-icon fa fa-check"></i>
-                                                    Aplicar
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div class="group">
-                                        <h3 class="accordion-header">Baja Rotaci&oacute;n</h3>
-
-                                        <form class="form-horizontal contentAccordion" role="form">
-                                            <div class="contentAccordion">
-                                                <div class="form-group">
-                                                    <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1"> Largo </label>
-                                                    <div class="col-sm-7">
-                                                        <input id="form-field-1-1" class="col-xs-10 col-sm-7" type="text">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1"> Ancho </label>
-                                                    <div class="col-sm-7">
-                                                        <input id="form-field-1-1" class="col-xs-10 col-sm-7" type="text">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-12 control-label" for="form-field-select-1">Pertenece a</label>
-                                                    <div class="col-sm-12">
-                                                        <select class="col-sm-12" id="form-field-select-1">
-                                                            <option value="">Almacenamiento</option>
-                                                            <option value="">Cuarentena</option>
-                                                            <option value="">Picking</option>
-                                                            <option value="">Crossdock</option>
-                                                            <option value="">Maquila</option>
-                                                            <option value="">Merma</option>
-                                                            <option value="">Devoluci&oacute;n</option>
-                                                            <option value="">Desahogo</option>
-                                                            <option value="">Control de Calidad</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <button class="btn btn-sm btn-info2" type="button">
-                                                    <i class="ace-icon fa fa-check"></i>
-                                                    Aplicar
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div class="group">
-                                        <h3 class="accordion-header">Prioridad Alta</h3>
-
-                                        <form class="form-horizontal contentAccordion" role="form">
-                                            <div class="contentAccordion">
-                                                <div class="form-group">
-                                                    <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1"> Largo </label>
-                                                    <div class="col-sm-7">
-                                                        <input id="form-field-1-1" class="col-xs-10 col-sm-7" type="text">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1"> Ancho </label>
-                                                    <div class="col-sm-7">
-                                                        <input id="form-field-1-1" class="col-xs-10 col-sm-7" type="text">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-12 control-label" for="form-field-select-1">Pertenece a</label>
-                                                    <div class="col-sm-12">
-                                                        <select class="col-sm-12" id="form-field-select-1">
-                                                            <option value="">Almacenamiento</option>
-                                                            <option value="">Cuarentena</option>
-                                                            <option value="">Picking</option>
-                                                            <option value="">Crossdock</option>
-                                                            <option value="">Maquila</option>
-                                                            <option value="">Merma</option>
-                                                            <option value="">Devoluci&oacute;n</option>
-                                                            <option value="">Desahogo</option>
-                                                            <option value="">Control de Calidad</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <button class="btn btn-sm btn-info2" type="button">
-                                                    <i class="ace-icon fa fa-check"></i>
-                                                    Aplicar
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div class="group">
-                                        <h3 class="accordion-header">Prioridad Media</h3>
-
-                                        <form class="form-horizontal contentAccordion" role="form">
-                                            <div class="contentAccordion">
-                                                <div class="form-group">
-                                                    <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1"> Largo </label>
-                                                    <div class="col-sm-7">
-                                                        <input id="form-field-1-1" class="col-xs-10 col-sm-7" type="text">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1"> Ancho </label>
-                                                    <div class="col-sm-7">
-                                                        <input id="form-field-1-1" class="col-xs-10 col-sm-7" type="text">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-12 control-label" for="form-field-select-1">Pertenece a</label>
-                                                    <div class="col-sm-12">
-                                                        <select class="col-sm-12" id="form-field-select-1">
-                                                            <option value="">Almacenamiento</option>
-                                                            <option value="">Cuarentena</option>
-                                                            <option value="">Picking</option>
-                                                            <option value="">Crossdock</option>
-                                                            <option value="">Maquila</option>
-                                                            <option value="">Merma</option>
-                                                            <option value="">Devoluci&oacute;n</option>
-                                                            <option value="">Desahogo</option>
-                                                            <option value="">Control de Calidad</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <button class="btn btn-sm btn-info2" type="button">
-                                                    <i class="ace-icon fa fa-check"></i>
-                                                    Aplicar
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div class="group">
-                                        <h3 class="accordion-header">Prioridad Baja</h3>
-
-                                        <form class="form-horizontal contentAccordion" role="form">
-                                            <div class="contentAccordion">
-                                                <div class="form-group">
-                                                    <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1"> Largo </label>
-                                                    <div class="col-sm-7">
-                                                        <input id="form-field-1-1" class="col-xs-10 col-sm-7" type="text">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1"> Ancho </label>
-                                                    <div class="col-sm-7">
-                                                        <input id="form-field-1-1" class="col-xs-10 col-sm-7" type="text">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-12 control-label" for="form-field-select-1">Pertenece a</label>
-                                                    <div class="col-sm-12">
-                                                        <select class="col-sm-12" id="form-field-select-1">
-                                                            <option value="">Almacenamiento</option>
-                                                            <option value="">Cuarentena</option>
-                                                            <option value="">Picking</option>
-                                                            <option value="">Crossdock</option>
-                                                            <option value="">Maquila</option>
-                                                            <option value="">Merma</option>
-                                                            <option value="">Devoluci&oacute;n</option>
-                                                            <option value="">Desahogo</option>
-                                                            <option value="">Control de Calidad</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <button class="btn btn-sm btn-info2" type="button">
-                                                    <i class="ace-icon fa fa-check"></i>
-                                                    Aplicar
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div class="group">
-                                        <h3 class="accordion-header">&Uacute;nica</h3>
-
-                                        <form class="form-horizontal contentAccordion" role="form">
-                                            <div class="contentAccordion">
-                                                <div class="form-group">
-                                                    <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1"> Largo </label>
-                                                    <div class="col-sm-7">
-                                                        <input id="form-field-1-1" class="col-xs-10 col-sm-7" type="text">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1"> Ancho </label>
-                                                    <div class="col-sm-7">
-                                                        <input id="form-field-1-1" class="col-xs-10 col-sm-7" type="text">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-sm-12 control-label" for="form-field-select-1">Pertenece a</label>
-                                                    <div class="col-sm-12">
-                                                        <select class="col-sm-12" id="form-field-select-1">
-                                                            <option value="">Almacenamiento</option>
-                                                            <option value="">Cuarentena</option>
-                                                            <option value="">Picking</option>
-                                                            <option value="">Crossdock</option>
-                                                            <option value="">Maquila</option>
-                                                            <option value="">Merma</option>
-                                                            <option value="">Devoluci&oacute;n</option>
-                                                            <option value="">Desahogo</option>
-                                                            <option value="">Control de Calidad</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <button class="btn btn-sm btn-info2" type="button">
-                                                    <i class="ace-icon fa fa-check"></i>
-                                                    Aplicar
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </div>
+                                        <?php } ?>
                                 </div>
                             </div>
-
+                            <?php }} ?>
                             <div id="unidad" class="tab-pane">
                                 <!--inicia panel del acordeon -->
                                 <div id="accordionUnidad" class="accordion-style2">
@@ -645,47 +149,41 @@
                                         <form class="form-horizontal contentAccordion" role="form">
                                             <div class="contentAccordion">
                                                 <div class="form-group">
-                                                    <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1"> Largo </label>
+                                                    <label class="col-sm-5 control-label no-padding-right" for="rack_largo"> Largo </label>
                                                     <div class="col-sm-7">
-                                                        <input id="form-field-1-1" class="col-xs-10 col-sm-7" type="text">
+                                                        <input id="rack_largo" class="col-xs-10 col-sm-7" type="text">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1"> Ancho </label>
+                                                    <label class="col-sm-5 control-label no-padding-right" for="rack_ancho"> Ancho </label>
                                                     <div class="col-sm-7">
-                                                        <input id="form-field-1-1" class="col-xs-10 col-sm-7" type="text">
+                                                        <input id="rack_ancho" class="col-xs-10 col-sm-7" type="text">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label class="col-sm-5 control-label no-padding-right" for="form-field-1-1"> Cantidad </label>
+                                                    <label class="col-sm-5 control-label no-padding-right" for="rack_qty"> Cantidad </label>
                                                     <div class="col-sm-7">
-                                                        <input id="form-field-1-1" class="col-xs-10 col-sm-7" type="text">
+                                                        <input id="rack_qty" class="col-xs-10 col-sm-7" type="text">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="col-sm-12 control-label" for="form-field-select-1">Pertenece a</label>
                                                     <div class="col-sm-12">
-                                                        <select class="col-sm-12" id="form-field-select-1">
-                                                            <option value="">Almacenamiento - Alta Rotaci&oacute;n</option>
-                                                            <option value="">Almacenamiento - Media Rotaci&oacute;n</option>
-                                                            <option value="">Almacenamiento - Baja Rotaci&oacute;n</option>
-                                                            <option value="">Crossdock - Prioridad Alta</option>
-                                                            <option value="">Crossdock - Prioridad Media</option>
-                                                            <option value="">Crossdock - Prioridad Baja</option>
-                                                        </select>
+                                                        <?php echo CHtml::dropDownList('idstorage_units', '' ,$dropDownArea, array('prompt' => 'Seleccione Area', 'class'=>'col-sm-12')); ?>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-sm-12">
                                                         <div class="clearfix">
                                                             <p>
-                                                                <label><input name="form-field-checkbox" type="checkbox"><span class="label label-lg label-pink arrowed-right">Double</span></label>
-                                                                <label><input name="form-field-checkbox" type="checkbox"><span class="label label-lg label-yellow arrowed-right">Single</span></label>
+                                                                <label><input id='rack_single' name="rack_single" type="checkbox"><span class="label label-lg label-yellow arrowed-right">Single</span></label>
+                                                                <label><input id='rack_double' name="rack_double" type="checkbox"><span class="label label-lg label-pink arrowed-right">Double</span></label>
+                                                                
                                                             </p>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <button class="btn btn-sm btn-info2" type="button">
+                                                <button class="btn btn-xs btn-info2" type="button">
                                                     <i class="ace-icon fa fa-check"></i>
                                                     Aplicar
                                                 </button>
@@ -701,25 +199,25 @@
                                                 <div class="form-group">
                                                     <label class="col-sm-6 control-label no-padding-right" for="form-field-1-1"> Largo </label>
                                                     <div class="col-sm-4">
-                                                        <input id="form-field-1-1" class="col-xs-10 col-sm-10" type="text">
+                                                        <input id="bloque_largo" class="col-xs-10 col-sm-10" type="text">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="col-sm-6 control-label no-padding-right" for="form-field-1-1"> Ancho </label>
                                                     <div class="col-sm-4">
-                                                        <input id="form-field-1-1" class="col-xs-10 col-sm-10" type="text">
+                                                        <input id="bloque_ancho" class="col-xs-10 col-sm-10" type="text">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="col-sm-6 control-label no-padding-right" for="form-field-1-1"> Dividir Largo</label>
                                                     <div class="col-sm-4">
-                                                        <input id="form-field-1-1" class="col-xs-10 col-sm-10" type="text">
+                                                        <input id="div_bloque_largo" class="col-xs-10 col-sm-10" type="text">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="col-sm-6 control-label no-padding-right" for="form-field-1-1"> Dividir Ancho</label>
                                                     <div class="col-sm-4">
-                                                        <input id="form-field-1-1" class="col-xs-10 col-sm-10" type="text">
+                                                        <input id="div_bloque_ancho" class="col-xs-10 col-sm-10" type="text">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -738,7 +236,7 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <button class="btn btn-sm btn-info2" type="button">
+                                                <button class="btn btn-xs btn-info2" type="button" id='bloque' name="bloque">
                                                     <i class="ace-icon fa fa-check"></i>
                                                     Aplicar
                                                 </button>
@@ -761,3 +259,29 @@
 
     </div><!-- /.col -->
 </div><!-- /.row -->
+<script type="text/javascript">
+    jQuery(function($) {
+
+        //jquery accordion
+        $("#accordionZona").accordion({
+            collapsible: true,
+            heightStyle: "content",
+            animate: 250,
+            header: ".accordion-header"
+        });
+
+        $("#accordionArea").accordion({
+            collapsible: true,
+            heightStyle: "content",
+            animate: 250,
+            header: ".accordion-header"
+        });
+
+        $("#accordionUnidad").accordion({
+            collapsible: true,
+            heightStyle: "content",
+            animate: 250,
+            header: ".accordion-header"
+        });
+    });
+    </script>

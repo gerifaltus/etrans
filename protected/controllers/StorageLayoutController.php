@@ -117,12 +117,21 @@ class StorageLayoutController extends Controller
             //mostrar la lista de las zonas, areas y unidades en acordeon
             $storageUnit = new StorageUnits;
             
-            $modelStorageUnit = $storageUnit->findAll();
+            $msu = $storageUnit->findAll(array('order'=>'idtype_units'));
             
-            //$dataProvider=new CActiveDataProvider('StorageLayout');
+            $modelStorageUnit = $this->extractDataUnits($msu);
+            
+            $dropDownZona = $this->extractUnits($modelStorageUnit, '1');
+            
+            $dropDownArea = $this->extractUnits($modelStorageUnit, '2');
+            
+            $valUnits = array('zona' =>1, 'area'=>2, 'rack'=>3, 'bloque'=>4);
             
             $this->render('index',array(
-                'modelStorageUnit' => $modelStorageUnit
+                'modelStorageUnit' => $modelStorageUnit,
+                'valunits' => $valUnits,
+                'dropDownZona' => $dropDownZona[0],
+                'dropDownArea' => $dropDownArea[1],
             ));
 	}
 
@@ -168,4 +177,52 @@ class StorageLayoutController extends Controller
 			Yii::app()->end();
 		}
 	}
+        
+        public function extractDataUnits($dataprovider)
+        {
+
+            $arrayUnidades = array();
+            
+            foreach($dataprovider as $row)
+            {
+                $arrayUnidades[$row->idtype_units][] = $row->attributes;
+                
+            }
+            
+            return $arrayUnidades;
+            
+        }
+        
+        public function extractUnits($arrayDataprovider, $units)
+        {
+            $arrayZona =array();
+            $arrayArea =array();
+            $arrayTmp = array();
+            
+            foreach($arrayDataprovider as $key => $val)
+            {
+                if($key == $units)
+                {
+                    foreach($val as $row)
+                    {
+                        $arrayZona[$row['idstorage_units']] = $row['name_units'];
+                    }
+                    
+                }
+                
+                if($key == $units)
+                {
+                    foreach($val as $row)
+                    {
+                        $arrayArea[$row['idstorage_units']] = $row['name_units'];
+                    }
+                    
+                }
+            }
+            
+            $arrayTmp[] = $arrayZona;
+            $arrayTmp[] = $arrayArea;
+            
+            return $arrayTmp;
+        }
 }

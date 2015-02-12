@@ -11,9 +11,9 @@
                         Productos Registrados
                         | <div class="btn-group btn-group-sm"><a href="#newProduct-form" class="btn btn-success" id="btnusernew" data-target="#newProduct-form" data-toggle="modal">Nuevo Almacen</a></div>
                     </div>
-                    <div class="table-responsive"> 
+                    <!--<div class="table-responsive"> -->
 
-                       <div class="dataTables_borderWrap"> 
+                       <!--<div class="dataTables_borderWrap"> -->
 
                         <table id="product_table" class="table table-striped table-bordered table-hover tbl-display">
                             <thead>
@@ -60,8 +60,8 @@
                                 </tr>      
                             </tbody>
                         </table>
-                    </div>
-                </div>
+                    <!--</div>-->
+                <!--</div>-->
             </div>
         </div>
     </div>
